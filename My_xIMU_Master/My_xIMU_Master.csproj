@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3DFCAE3C-97B7-42E8-9C8B-C636830E09A2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>My_xIMU_Master</RootNamespace>
+    <AssemblyName>My_xIMU_Master</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Emgu.CV, Version=2.3.2.1501, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>OpenCV\Emgu.CV.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.DebuggerVisualizers.VS2008, Version=2.2.1.1150, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>OpenCV\Emgu.CV.DebuggerVisualizers.VS2008.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.DebuggerVisualizers.VS2010, Version=2.2.1.1150, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>OpenCV\Emgu.CV.DebuggerVisualizers.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.GPU, Version=2.2.1.1150, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>OpenCV\Emgu.CV.GPU.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.ML, Version=2.2.1.1150, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>OpenCV\Emgu.CV.ML.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.UI, Version=2.3.2.1501, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>OpenCV\Emgu.CV.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.Util, Version=2.3.2.1501, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>OpenCV\Emgu.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Filtering">
+      <HintPath>..\..\..\mathnet-filtering-master\obj\lib\Net40\MathNet.Filtering.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Filtering.Kalman">
+      <HintPath>..\..\..\mathnet-filtering-master\obj\lib\Net40\MathNet.Filtering.Kalman.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>..\..\..\Documents\mathnet-filtering-master\packages\MathNet.Numerics\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="3D Chart\3D_WPF_Chart.xaml.cs">
+      <DependentUpon>3D_WPF_Chart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="3D Chart\Bar3D.cs" />
+    <Compile Include="3D Chart\Chart3D.cs" />
+    <Compile Include="3D Chart\ColorMesh3D.cs" />
+    <Compile Include="3D Chart\Cone3D.cs" />
+    <Compile Include="3D Chart\Cylinder3D.cs" />
+    <Compile Include="3D Chart\Ellipse3D.cs" />
+    <Compile Include="3D Chart\Mesh3D.cs" />
+    <Compile Include="3D Chart\Model3D.cs" />
+    <Compile Include="3D Chart\Pyramid3D.cs" />
+    <Compile Include="3D Chart\ScatterChart3D.cs" />
+    <Compile Include="3D Chart\ScatterPlotItem.cs" />
+    <Compile Include="3D Chart\SurfaceChart3D.cs" />
+    <Compile Include="3D Chart\TextureMapping.cs" />
+    <Compile Include="3D Chart\TransformMatrix.cs" />
+    <Compile Include="3D Chart\Triangle3D.cs" />
+    <Compile Include="3D Chart\UniformSurfaceChart3D.cs" />
+    <Compile Include="3D Chart\Vertex3D.cs" />
+    <Compile Include="3D Chart\ViewportRect.cs" />
+    <Compile Include="Data.cs" />
+    <Compile Include="InitializeCharts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KalmaFilter.cs" />
+    <Compile Include="MadgwickAHRS.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MicroLibrary.cs" />
+    <Compile Include="MotionCalculator.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Status.cs" />
+    <Compile Include="xIMU API\AsyncReadCompletedEventArgs.cs" />
+    <Compile Include="xIMU API\AsyncReadProgressChangedEventArgs.cs" />
+    <Compile Include="xIMU API\AsyncScanCompletedEventArgs.cs" />
+    <Compile Include="xIMU API\AsyncScanProgressChangedEventArgs.cs" />
+    <Compile Include="xIMU API\CalADXL345busData.cs" />
+    <Compile Include="xIMU API\CalAnalogueInputData.cs" />
+    <Compile Include="xIMU API\CalBatteryAndThermometerData.cs" />
+    <Compile Include="xIMU API\CalInertialAndMagneticData.cs" />
+    <Compile Include="xIMU API\CommandData.cs" />
+    <Compile Include="xIMU API\CSVfileWriter.cs" />
+    <Compile Include="xIMU API\DateTimeData.cs" />
+    <Compile Include="xIMU API\DigitalIOdata.cs" />
+    <Compile Include="xIMU API\DigitalPortBits.cs" />
+    <Compile Include="xIMU API\Enums.cs" />
+    <Compile Include="xIMU API\ErrorData.cs" />
+    <Compile Include="xIMU API\FixedFloat.cs" />
+    <Compile Include="xIMU API\PacketConstruction.cs" />
+    <Compile Include="xIMU API\PacketCount.cs" />
+    <Compile Include="xIMU API\PacketEncoding.cs" />
+    <Compile Include="xIMU API\PortAssignment.cs" />
+    <Compile Include="xIMU API\PortScanner.cs" />
+    <Compile Include="xIMU API\PWMoutputData.cs" />
+    <Compile Include="xIMU API\QuaternionData.cs" />
+    <Compile Include="xIMU API\RawADXL345busData.cs" />
+    <Compile Include="xIMU API\RawAnalogueInputData.cs" />
+    <Compile Include="xIMU API\RawBatteryAndThermometerData.cs" />
+    <Compile Include="xIMU API\RawInertialAndMagneticData.cs" />
+    <Compile Include="xIMU API\RegisterData.cs" />
+    <Compile Include="xIMU API\xIMUdata.cs" />
+    <Compile Include="xIMU API\xIMUfile.cs" />
+    <Compile Include="xIMU API\xIMUserial.cs" />
+    <Compile Include="xIMU.cs" />
+    <Compile Include="xIMUDataGatherer.cs" />
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="opencv_core231.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="opencv_imgproc231.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="3D Chart\3D_WPF_Chart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

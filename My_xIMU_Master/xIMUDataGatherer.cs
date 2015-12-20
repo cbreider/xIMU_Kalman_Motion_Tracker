@@ -54,8 +54,6 @@ namespace My_xIMU_Master
         #region Constructor
         public xIMUDataGatherer(float sampleFreq)
         {
-            
-
             this.sampleFrequency = sampleFreq;
             transitionMatrix = new Matrix<float>(new float[,]
                      {
@@ -143,9 +141,9 @@ namespace My_xIMU_Master
         #region Matrix  Properties
 
         public Matrix<float> LinState {get { return linState; } set { linState = value; }}
+
         public Matrix<float> KalmanEstState {get { return kalmanEstState; } set { kalmanEstState = value; }}
-
-
+  
         public Matrix<float> TransitionMatrix {get { return transitionMatrix; } }
 
         public Matrix<float> RotationMatrix { get { return getRotationmatrix(); }/*  set { roationMatrix = value; }*/ }
@@ -154,12 +152,8 @@ namespace My_xIMU_Master
 
 
         #region Array Porperties
-        
-
         public float[] Quaternion {get { return quaternion; } set { quaternion = value; }}
      
-
-
         #endregion
         public float SampleFrequency
         {
@@ -200,17 +194,14 @@ namespace My_xIMU_Master
             foreach(xIMUData data in myData)
             {
                 lock(data.Plotdata)
-                {
-                    
-                        data.Plotdata.DataToPlot.Enqueue(new float[3] { data.CurrentMeasurement[0], data.CurrentMeasurement[1], data.CurrentMeasurement[2] } );
-                    
+                {                    
+                        data.Plotdata.DataToPlot.Enqueue(new float[3] { data.CurrentMeasurement[0], data.CurrentMeasurement[1], data.CurrentMeasurement[2] } );                    
                  //   data.MeasurementOfLastMinute.Enqueue(data.CurrentMeasurement);
                     //data.MeasurementOfLastMinute.Dequeue();
                 }
             }
-
-
         }
+
         public List<PlotData> GetPlotData()
         {
             List<PlotData> _plotdataList = new List<PlotData>();
@@ -242,8 +233,6 @@ namespace My_xIMU_Master
         }
         private Matrix<float> getRotationmatrix()
         {
-
-
             float[] matrix = (new x_IMU_API.QuaternionData(quaternion)).ConvertToConjugate().ConvertToRotationMatrix();
             return new Matrix<float>(new float[,]
             {
@@ -251,26 +240,6 @@ namespace My_xIMU_Master
                     { matrix[3], matrix[4], matrix[5] },
                     { matrix[6], matrix[7], matrix[8] }
             });
-
-            /* float R11 = 1-2 *( quaternion[0] * quaternion[0] +   quaternion[1] * quaternion[1]);
-             float R12 = 2 * (quaternion[1] * quaternion[2] - quaternion[0] * quaternion[3]);
-             float R13 = 2 * (quaternion[1] * quaternion[3] + quaternion[0] * quaternion[2]);
-             float R21 = 2 * (quaternion[1] * quaternion[2] + quaternion[0] * quaternion[3]);
-             float R22 = 1-2 *( quaternion[3] * quaternion[3]  +  quaternion[1] * quaternion[1]);
-             float R23 = 2 * (quaternion[2] * quaternion[3] - quaternion[0] * quaternion[1]);
-             float R31 = 2 * (quaternion[1] * quaternion[3] - quaternion[0] * quaternion[2]);
-             float R32 = 2 * (quaternion[2] * quaternion[3] + quaternion[0] * quaternion[1]);
-             float R33 = 1-2 * (quaternion[1] * quaternion[1] +  quaternion[2] * quaternion[2]);*/
-
-
-
-            /*  return new Matrix<float>(new float[,]
-                   {
-                      { R11, R12, R13 },
-                      { R21, R22, R23 },
-                      { R31, R32, R33 }
-                   });*/
-
         }
     }
 }

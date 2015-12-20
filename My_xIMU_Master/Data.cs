@@ -56,9 +56,9 @@ namespace My_xIMU_Master
         {
             get { return _measurementOfLastMinute; }
             set { _measurementOfLastMinute = value; }
-        }
-        
+        }       
     }
+
     public class PlotData: ICloneable
     {
         public DataTypes Type;
@@ -67,7 +67,6 @@ namespace My_xIMU_Master
         {
             get { return _dataToPlot; }
             set { _dataToPlot = value; }
-
         }
         public object Clone()
         {
@@ -76,23 +75,18 @@ namespace My_xIMU_Master
     }
 
     public class Accelerometer:xIMUData
-    {
-        
-        public Accelerometer() { base.Plotdata.Type = DataTypes.Accelerometer; }
-       
+    {       
+        public Accelerometer() { base.Plotdata.Type = DataTypes.Accelerometer; }      
     }
     
     public class Gyroscope:xIMUData
     {
         public Gyroscope() { base.Plotdata.Type = DataTypes.Gyroscope; }
-
     }
 
     public class Magnetometer:xIMUData
     {
-        public Magnetometer() { base.Plotdata.Type = DataTypes.Magnetometer; }
-
-        
+        public Magnetometer() { base.Plotdata.Type = DataTypes.Magnetometer; }       
     }  
     public class LinearAcceleration:xIMUData
     {

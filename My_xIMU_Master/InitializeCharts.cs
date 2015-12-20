@@ -54,7 +54,6 @@ namespace My_xIMU_Master
             Charts.Add(ChartMagX);
             Charts.Add(ChartMagY);
             Charts.Add(ChartMagZ);
-
             Charts.Add(ChartLinAccX);
             Charts.Add(ChartLinAccY);
             Charts.Add(ChartLinAccZ);
@@ -64,10 +63,10 @@ namespace My_xIMU_Master
             Charts.Add(ChartLinPosX);
             Charts.Add(ChartLinPosY);
             Charts.Add(ChartLinPosZ);
+
             int i = 0;
             foreach (Chart chart in Charts)
             {
-
                 chart.Series.Add(new Series(chart.Name));
                 chart.Series[0].Color = Color.Red;
                 chart.Series[0].ChartType = SeriesChartType.FastLine;
@@ -76,8 +75,6 @@ namespace My_xIMU_Master
                 chart.ChartAreas[0].AxisX.Maximum = 6;
                 chart.ChartAreas[0].AxisX.Minimum = 0;
                 chart.ChartAreas[0].AxisX.Interval = 0.5;
-
-
 
                 string name;
                 double[] MinMax = new double[2];
@@ -122,12 +119,10 @@ namespace My_xIMU_Master
                 chart.ChartAreas[0].AxisY.Minimum = MinMax[0];
                 chart.ChartAreas[0].AxisY.Maximum = MinMax[1];
 
-
                 chart.Legends.Add(new Legend());
                 chart.Size = new System.Drawing.Size(780, 270);
                 if (i >= 9)
-                {
-                   
+                {                   
                     name = "Kal. Est. " + chart.Name;
                     chart.Series.Add(new Series(name));
                     chart.Series[1].Color = Color.Green;
@@ -152,7 +147,6 @@ namespace My_xIMU_Master
                 Charts[i].Location = new Point(0, 0);
                 Charts[i].Enabled = true;
                 Charts[i].Visible = true;
-
                 i++;
                 page.Controls.Add(Charts[i]);
                 Charts[i].Parent = page;
@@ -164,12 +158,7 @@ namespace My_xIMU_Master
                 Charts[i].Location = new Point(0, 540);
                 Charts[i].Enabled = true;
                 i++;
-
             }
-
-
-
         }
-
     }
 }

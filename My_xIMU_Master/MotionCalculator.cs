@@ -42,9 +42,7 @@ namespace My_xIMU_Master
 
         private Queue<float[]> _lowpassFilterQueue = new Queue<float[]>();
         private bool _shouldIfilter;
-       
-        
-       
+     
         public MotionCalculator(xIMU xIMU)
         {
             this.xIMU = xIMU;
@@ -52,13 +50,11 @@ namespace My_xIMU_Master
             magnitudes = new float[] { 0, 0, 0, 0, 0 };
             average_magnitude = new float();
             varianz = new float();
-            myKalmanFilter = new KalmanFilter();
-           
+            myKalmanFilter = new KalmanFilter();           
         }
 
         public void Start_Calculation()
-        {
-            
+        {            
             Calculate_LinPos();
         }
 
@@ -128,7 +124,6 @@ namespace My_xIMU_Master
 
                 }
                 counter = 0;
-
             }
 
             xIMU.DataGatherer.LinState[0, 0] = xIMU.DataGatherer.KalmanEstState[0, 0];
@@ -136,9 +131,7 @@ namespace My_xIMU_Master
             xIMU.DataGatherer.LinState[2, 0] = xIMU.DataGatherer.KalmanEstState[2, 0];
             xIMU.DataGatherer.LinState = xIMU.DataGatherer.TransitionMatrix * xIMU.DataGatherer.LinState;
 
-
             xIMU.DataGatherer.Update();
-
         }
        
         public float[] MultiplyMatrixVector(float[,] a, float[] b)
@@ -157,10 +150,11 @@ namespace My_xIMU_Master
             return c;
         }
 
-        public void Position_Reset() { xIMU.DataGatherer.LinState = new Matrix<float>(new float[,]{ { 0},{ 0},{ 0},{ 0},{ 0},{ 0},{ 0},{ 0},{ 0} }); 
-            myKalmanFilter.Reset();
-            
-    }
+        public void Position_Reset()
+        {
+            xIMU.DataGatherer.LinState = new Matrix<float>(new float[,]{ { 0},{ 0},{ 0},{ 0},{ 0},{ 0},{ 0},{ 0},{ 0} }); 
+            myKalmanFilter.Reset();           
+        }
         public void Velocity_Reset()
         {
             xIMU.DataGatherer.LinState[3, 0] = 0; xIMU.DataGatherer.LinState[4, 0] = 0; xIMU.DataGatherer.LinState[5, 0] = 0;

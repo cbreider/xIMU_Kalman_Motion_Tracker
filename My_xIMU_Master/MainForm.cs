@@ -17,41 +17,30 @@ namespace My_xIMU_Master
 {
     public partial class MainForm : Form
     {
-        
-       
-
-       
-
         delegate void UpdateCallback();
-
-
-        #region Private Fields  and Methods
-        private x_IMU_API.PortAssignment[] portAssignment;
-        private xIMU xIMU1;
-
-        private int _updtaecounter;
-        private System.Timers.Timer updatecounterTime = new System.Timers.Timer();
-        private  System.Windows.Forms.Timer myUpdateTestTimer;
-        private System.Timers.Timer _guiUpdateTimer = new System.Timers.Timer();
-        BackgroundWorker ChartWorker = new BackgroundWorker();
-        private double timer;
-        private bool _clearSeries;
-        private float _timerSeries;
-        private bool track = new bool();
-        private bool available;
-        private bool calibrating = new bool();
-        private MicroLibrary.MicroTimer microtimer;
-        
         delegate void delUpdateGUI();
         UpdateCallback u;
 
+        #region Private Fields  and Methods
+        private x_IMU_API.PortAssignment[] portAssignment;
+        private xIMU xIMU_1;
+        private xIMU xIMU_2;
+
+        private System.Timers.Timer _guiUpdateTimer = new System.Timers.Timer();
+        BackgroundWorker ChartWorker = new BackgroundWorker();
+        private double _timerCounter;
+        private bool _clearSeries;
+        private float _timerSeries;
+        private bool track;
+        private bool _available;
+        private bool calibrating;
+        private MicroLibrary.MicroTimer microtimer;
+ 
         float X = 0;
         float Y = 0;
         float Z = 0;
-        int zahler = 0;
-
+        int zaehler = 0;
         #endregion
-
 
         #region Init
         public MainForm()
@@ -64,16 +53,13 @@ namespace My_xIMU_Master
             ConStateLabel.Text = "Not Connected";
             AviablePortsLable.Text = "No Ports aviable";
             SampleFreqLabel.Text = "----------";
-            available = false;
-            myUpdateTestTimer = new System.Windows.Forms.Timer();
-            myUpdateTestTimer.Interval = 200;
-            myUpdateTestTimer.Tick += new EventHandler(testTick);
+            _available = false;
           
             ButtonOpen.Enabled = false;
             Start.Enabled = false;
             Stop.Enabled = false;
 
-            _guiUpdateTimer.Interval =100;
+            _guiUpdateTimer.Interval = 100;
             _guiUpdateTimer.Elapsed += new System.Timers.ElapsedEventHandler(UpdateGUI);
             KeyPreview = true;
             KeyDown += new KeyEventHandler(ThreeDPoseChart.OnKeyDown);
@@ -81,7 +67,6 @@ namespace My_xIMU_Master
             SizeChanged += new System.EventHandler(MainForm_SizeChanged);
         
             InitTabControl();
-
         }
         #endregion
 
@@ -93,17 +78,17 @@ namespace My_xIMU_Master
             portAssignment = (new x_IMU_API.PortScanner(false, true)).Scan();
             if (portAssignment.Count() > 0)
             {
-                available = true;
+                _available = true;
             }
             else
             {
-                available = false;
+                _available = false;
             }
         }
 
         private void Search_finished(object sender, EventArgs e)
         {
-            if (available)
+            if (_available)
             {
                 ButtonOpen.Enabled = true;
                 AviablePortsLable.Text = "Aviable Ports:   " + portAssignment[0].PortName;
@@ -111,7 +96,6 @@ namespace My_xIMU_Master
             else
             {
                 ButtonClose.Enabled = false;
-                myUpdateTestTimer.Enabled = false;
                 ButtonOpen.Enabled = false;
                 AviablePortsLable.Text = "No xIMU aviable!";
             }
@@ -121,10 +105,9 @@ namespace My_xIMU_Master
 
         #region Connect
         private void Connect_to_xIMUs()
-        {
-            
-            xIMU1 = new xIMU(portAssignment[0], 1, LowPassChecked.Checked);
-            Status ConnectionState = xIMU1.Connect();
+        {            
+            xIMU_1 = new xIMU(portAssignment[0], 1, LowPassChecked.Checked);
+            Status ConnectionState = xIMU_1.Connect();
             switch(ConnectionState)
             {
                 case Status.Good:
@@ -137,44 +120,38 @@ namespace My_xIMU_Master
                     ButtonOpen.Enabled = true;
                     ButtonClose.Enabled = false;                   
                     break;
-
             }
             
-
-            timer = 0;
-            _timerSeries = 0;
+            _timerCounter = 0;
             _clearSeries = false;
-
         }
         #endregion
+
         #region Update GUI
         private void UpdateGUI(object sender, System.Timers.ElapsedEventArgs e)
         {
-            timer += 0.1;
-            _timerSeries += 0.1f;
-            if (_timerSeries >= 10)
+            _timerCounter += 0.1;
+            if (_timerCounter%10 == 0)
             {
                 _clearSeries = true;
-                _timerSeries = 0;
             }
             //ChartWorker.RunWorkerAsync();
             UpdateCharts();
+            UpdateWPFChart();
         }
 
         private void UpdateCharts(/*object sender, DoWorkEventArgs e*/)
         {
             if (InvokeRequired)
             {
-                 u = new UpdateCallback(UpdateCharts);
+                u = new UpdateCallback(UpdateCharts);
                 BeginInvoke(u);
             }
             else
-
             {
-                _updtaecounter++;
-                SampleFreqLabel.Text = xIMU1.DataGatherer.SampleFrequency.ToString();
+                SampleFreqLabel.Text = xIMU_1.DataGatherer.SampleFrequency.ToString();
                
-               List<PlotData> plotdata= xIMU1.DataGatherer.GetPlotData();
+                List<PlotData> plotdata= xIMU_1.DataGatherer.GetPlotData();
                 Series seriesX = new Series();
                 Series seriesY = new Series();
                 Series seriesZ = new Series();
@@ -244,15 +221,15 @@ namespace My_xIMU_Master
 
                 foreach (Chart chart in Charts)
                 {
-                    chart.ChartAreas[0].AxisX.Maximum = timer;
-                    chart.ChartAreas[0].AxisX.Minimum = timer - 2;
+                    chart.ChartAreas[0].AxisX.Maximum = _timerCounter;
+                    chart.ChartAreas[0].AxisX.Minimum = _timerCounter - 2;
                 }
             }
         }
          private  void UpdateChart(Series chartX,Series chartY, Series chartZ, PlotData data)
         {
             float[] point = new float[3];
-            float temTime = (float)timer;
+            float temTime = (float)_timerCounter;
             float interval = (float)_guiUpdateTimer.Interval / (1000 * data.DataToPlot.Count);
 
             while (data.DataToPlot.Count>0)
@@ -263,7 +240,6 @@ namespace My_xIMU_Master
                 {
                     if(_clearSeries)
                     {
-
                         chartX.Points.Clear();
                         chartY.Points.Clear();
                         chartZ.Points.Clear();
@@ -272,29 +248,24 @@ namespace My_xIMU_Master
                     chartY.Points.AddXY(temTime, point[1]);
                     chartZ.Points.AddXY(temTime, point[2]);
                 }
-
             }
-
         }
         private void ChartUpdateCompleted(object sender, RunWorkerCompletedEventArgs e)
-         {
-
-         }
-        private void testTick(object sender, EventArgs e)
         {
-            X = xIMU1.DataGatherer.KalEstLinPos.CurrentMeasurement[0] * 100;
-            Y = xIMU1.DataGatherer.KalEstLinPos.CurrentMeasurement[1]*100;
-            Z=xIMU1.DataGatherer.KalEstLinPos.CurrentMeasurement[2]*100;
-            zahler++;
-            ThreeDPoseChart.plot_next(X, Y, Z, zahler, xIMU1.DataGatherer.RotMatrix());
-           
-
+        }
+        private void UpdateWPFChart()
+        {
+            X = xIMU_1.DataGatherer.KalEstLinPos.CurrentMeasurement[0] * 100;
+            Y = xIMU_1.DataGatherer.KalEstLinPos.CurrentMeasurement[1]*100;
+            Z = xIMU_1.DataGatherer.KalEstLinPos.CurrentMeasurement[2] * 100;
+            zaehler++;
+            ThreeDPoseChart.plot_next(X, Y, Z, zaehler, xIMU_1.DataGatherer.RotMatrix());        
         }
         #endregion
+
         #region Buttons
         private void B_Track_Click(object sender, EventArgs e)
         {
-
         }
 
         private void B_ScanForPorts_Click(object sender, EventArgs e)
@@ -303,27 +274,23 @@ namespace My_xIMU_Master
             BackgroundWorker bw = new BackgroundWorker();
             bw.DoWork += new DoWorkEventHandler(Search_for_xIMU);
             bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Search_finished);
-            bw.RunWorkerAsync();
-           
+            bw.RunWorkerAsync();         
         }
 
         private void ButtonOpen_Click(object sender, EventArgs e)
         {
             Connect_to_xIMUs();
             B_ScanForPorts.Enabled = false;
-        
-
             //timer1.Interval = 100;
             //timer1.Enabled = true;
           //  microtimer.Interval = 10000;
             //microtimer.Enabled = true;
-
         }
 
         private void ButtonClose_Click(object sender, EventArgs e)
         {
             _guiUpdateTimer.Elapsed -= new System.Timers.ElapsedEventHandler(UpdateGUI);
-            if (xIMU1 != null) xIMU1.Close();
+            if (xIMU_1 != null) xIMU_1.Close();
 
             //microtimer.MicroTimerElapsed -= new MicroLibrary.MicroTimer.MicroTimerElapsedEventHandler(microtimer_tick);
             //microtimer.Enabled = false;
@@ -332,51 +299,33 @@ namespace My_xIMU_Master
             Application.Exit();
         }
         
-       
-
-        private void Stop_Click(object sender, EventArgs e)
-        {
-          
-            xIMU1.StartTracking();
-            updatecounterTime.Interval = 1000;
-            updatecounterTime.Elapsed += new System.Timers.ElapsedEventHandler(ticktack);
-            _updtaecounter = 0;
-            updatecounterTime.Enabled = true;
+        private void Button_Start_Click(object sender, EventArgs e)
+        {          
+            xIMU_1.StartTracking();
             //ChartWorker.DoWork += new DoWorkEventHandler(UpdateCharts);
             ChartWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ChartUpdateCompleted);
             Stop.Enabled = true;
             _guiUpdateTimer.Enabled = true;
-            myUpdateTestTimer.Enabled = true;
         }
 
-        private void Start_Click(object sender, EventArgs e)
+        private void Button_Stop_Click(object sender, EventArgs e)
         {
-            xIMU1.StopTracking();
+            xIMU_1.StopTracking();
             Start.Enabled = true;
         }
 
         private void button5_Click(object sender, EventArgs e)
-        {
-        
-        }
-        
-        
-        private void ticktack(object sender, EventArgs e)
-        {
-
-            _updtaecounter = 0;
-
+        {       
         }
 
         private void button41_Click(object sender, EventArgs e)
         {
-            xIMU1.Reset_Pos();
+            xIMU_1.Reset_Pos();
             ThreeDPoseChart.Clear();
         }
         #endregion
         private void MainForm_SizeChanged(object sender, EventArgs e)
         {
-
             tabControl1.Size = new Size((int)Math.Round(Width * 0.5) - 10, Size.Height - 40);
             tabControl1.Location = new Point(0, 0);
 
@@ -395,14 +344,11 @@ namespace My_xIMU_Master
                 page.Controls[1].Location = new Point(0, (int)Math.Round((double)tabControl1.Height / 3));
                 page.Controls[2].Location = new Point(0, 2 * (int)Math.Round((double)tabControl1.Height / 3));
             }
-
         }
 
         private void LowPassChecked_CheckedChanged(object sender, EventArgs e)
         {
-            xIMU1.FilterChanged(LowPassChecked.Checked);
+            xIMU_1.FilterChanged(LowPassChecked.Checked);
         }
     }
-
-
 }

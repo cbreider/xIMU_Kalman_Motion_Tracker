@@ -35,7 +35,6 @@ namespace My_xIMU_Master
         private x_IMU_API.xIMUserial xIMUSerial;
         private int _xIMU_Nr;
 
-
         private MotionCalculator tracker;
         private MadgwickAHRS _ahrs;
         public xIMUDataGatherer DataGatherer;
@@ -49,31 +48,19 @@ namespace My_xIMU_Master
 
         private bool isReady;
         private int sampleCounter;
-
-       
-
-
         #endregion
-
-
-
 
         public string xIMU_ID { get { return portAssignment.DeviceID ; } }
         public int xIMU_Nr { get { return _xIMU_Nr; } }
-        public string Port { get { return portAssignment.PortName; } }
-
-        
+        public string Port { get { return portAssignment.PortName; } }       
         public string ConnectionState { get { if (xIMUSerial.IsOpen) { return "Connected"; } else { return "Not Connected"; } } }
-
         public x_IMU_API.xIMUserial XIMUSerial { get { return xIMUSerial; } }
-       
+
         //public float Interval { get { return interval; } }
-        
 
         public xIMU(x_IMU_API.PortAssignment portAssignment, int xIMU_Nr, bool filter)
            
-        {
-            
+        {            
             this.portAssignment = portAssignment;
             this._xIMU_Nr = xIMU_Nr;
             xIMUSerial = new x_IMU_API.xIMUserial(portAssignment.PortName);
@@ -81,10 +68,7 @@ namespace My_xIMU_Master
 
             _ahrs = new MadgwickAHRS(1f / 256f, 0.1f);
             tracker = new MotionCalculator(this);
-            tracker.FilterStateChanged(filter);
-
-
-
+            tracker.FilterStateChanged(filter);           
         }
 
         public Status Connect()
@@ -98,8 +82,6 @@ namespace My_xIMU_Master
             {
                 return Status.Bad;
             }
-
-
         }
         public Status Disconnect()
         {
@@ -113,36 +95,29 @@ namespace My_xIMU_Master
                 return Status.Bad;
             }
         }
+
         public void StartTracking()
         {
             isReady = true;
-
-            sampleTimer.Interval = 1000;
-            
+            sampleTimer.Interval = 1000;            
             sampleCounter = 0;
             sampleTimer.Elapsed += new System.Timers.ElapsedEventHandler(sample_frequency);
             sampleTimer.Enabled = true;
-            queueTimer.Interval = 60000;
-            queueTimer.Elapsed += new System.Timers.ElapsedEventHandler(queue_overflow);
             // myIIR_Filter = new MathNet.Filtering.IIR.OnlineIirFilter(coefficients);
             //periode_microtimer.MicroTimerElapsed += new MicroLibrary.MicroTimer.MicroTimerElapsedEventHandler(periode_microtimer_tick);*/
-            xIMUSerial.CalInertialAndMagneticDataReceived += new x_IMU_API.xIMUserial.onCalInertialAndMagneticDataReceived(xIMU_Update);
-           
+            xIMUSerial.CalInertialAndMagneticDataReceived += new x_IMU_API.xIMUserial.onCalInertialAndMagneticDataReceived(xIMU_Update);          
         }
 
         public void StopTracking()
         {
             xIMUSerial.CalInertialAndMagneticDataReceived -= new x_IMU_API.xIMUserial.onCalInertialAndMagneticDataReceived(xIMU_Update);
             sampleTimer.Enabled = false;
-
         }
         private void xIMU_Update(object sender1, x_IMU_API.CalInertialAndMagneticData e1)
         {
             if (isReady)
             {
                 isReady = false;
-
-
 
                 _ahrs.Update(deg2rad(e1.Gyroscope[0]), deg2rad(e1.Gyroscope[1]), deg2rad(e1.Gyroscope[2]),
                   e1.Accelerometer[0], e1.Accelerometer[1], e1.Accelerometer[2], e1.Magnetometer[0], e1.Magnetometer[1], e1.Magnetometer[2], 1 / 256f);
@@ -153,27 +128,14 @@ namespace My_xIMU_Master
                 DataGatherer.Gyroscope.CurrentMeasurement = e1.Gyroscope;
                 DataGatherer.Magnetometer.CurrentMeasurement = e1.Magnetometer;
                 DataGatherer.Quaternion = _ahrs.Quaternion;
-               
-
-                
+                              
                 //base.FilteredAcc = myIIR_Filter.ProcessSamples(new double[3] { (double)e1.Accelerometer[0], (double)e1.Accelerometer[1], (double)e1.Accelerometer[0] });
-
-                tracker.Start_Calculation();
-
-                
+                tracker.Start_Calculation();                
                 sampleCounter++;
                 isReady = true;
-
             }
         }
         
-       /* public void GUI_has_plotted()
-        {
-            foreach(xIMUData data in DataGatherer.myData)
-            {
-                data.DataToPlot.Clear();
-            }
-        }*/
         static float deg2rad(float degrees)
         {
             return (float)(Math.PI / 180) * degrees;
@@ -184,12 +146,8 @@ namespace My_xIMU_Master
         {
             DataGatherer.SampleFrequency =  sampleCounter;
             sampleCounter = 0;
+        }
 
-        }
-        private void queue_overflow(object sender, System.Timers.ElapsedEventArgs e)
-        {
-           
-        }
         public void FilterChanged(bool filter)
         {
             tracker.FilterStateChanged(filter);

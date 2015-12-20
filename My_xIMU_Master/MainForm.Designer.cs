@@ -74,7 +74,6 @@ namespace My_xIMU_Master
             this.TabRecognitionCont = new System.Windows.Forms.TabPage();
             this.TabExportCont = new System.Windows.Forms.TabPage();
             this.TabAboutCont = new System.Windows.Forms.TabPage();
-            this.labelCopy = new System.Windows.Forms.Label();
             this.labelAuthor = new System.Windows.Forms.Label();
             this.labelAdress = new System.Windows.Forms.Label();
             this.labelInstitue = new System.Windows.Forms.Label();
@@ -90,7 +89,6 @@ namespace My_xIMU_Master
             this.TabTrackingCont.SuspendLayout();
             this.TabAboutCont.SuspendLayout();
             this.SuspendLayout();
-            this.ThreeDPoseChart = new _3D_Chart._3D_WPF_Chart();
             // 
             // tabControl1
             // 
@@ -176,7 +174,7 @@ namespace My_xIMU_Master
             this.Start.TabIndex = 13;
             this.Start.Text = "Stop DataStream";
             this.Start.UseVisualStyleBackColor = true;
-            this.Start.Click += new System.EventHandler(this.Start_Click);
+            this.Start.Click += new System.EventHandler(this.Button_Stop_Click);
             // 
             // Stop
             // 
@@ -186,7 +184,7 @@ namespace My_xIMU_Master
             this.Stop.TabIndex = 12;
             this.Stop.Text = "Start DataStream";
             this.Stop.UseVisualStyleBackColor = true;
-            this.Stop.Click += new System.EventHandler(this.Stop_Click);
+            this.Stop.Click += new System.EventHandler(this.Button_Start_Click);
             // 
             // button42
             // 
@@ -331,7 +329,7 @@ namespace My_xIMU_Master
             this.elementHost1.Size = new System.Drawing.Size(775, 630);
             this.elementHost1.TabIndex = 1;
             this.elementHost1.Text = "elementHost1";
-            this.elementHost1.Child = ThreeDPoseChart;
+            this.elementHost1.Child = null;
             // 
             // button148
             // 
@@ -533,7 +531,6 @@ namespace My_xIMU_Master
             // 
             // TabAboutCont
             // 
-            this.TabAboutCont.Controls.Add(this.labelCopy);
             this.TabAboutCont.Controls.Add(this.labelAuthor);
             this.TabAboutCont.Controls.Add(this.labelAdress);
             this.TabAboutCont.Controls.Add(this.labelInstitue);
@@ -550,19 +547,10 @@ namespace My_xIMU_Master
             this.TabAboutCont.Text = "About";
             this.TabAboutCont.UseVisualStyleBackColor = true;
             // 
-            // labelCopy
-            // 
-            this.labelCopy.AutoSize = true;
-            this.labelCopy.Location = new System.Drawing.Point(353, 13);
-            this.labelCopy.Name = "labelCopy";
-            this.labelCopy.Size = new System.Drawing.Size(93, 13);
-            this.labelCopy.TabIndex = 26;
-            this.labelCopy.Text = "Copyright ©  2015";
-            // 
             // labelAuthor
             // 
             this.labelAuthor.AutoSize = true;
-            this.labelAuthor.Location = new System.Drawing.Point(270, 36);
+            this.labelAuthor.Location = new System.Drawing.Point(168, 36);
             this.labelAuthor.Name = "labelAuthor";
             this.labelAuthor.Size = new System.Drawing.Size(138, 13);
             this.labelAuthor.TabIndex = 25;
@@ -696,7 +684,6 @@ namespace My_xIMU_Master
         private System.Windows.Forms.Label labelFH;
         private System.Windows.Forms.Label LabelVersion;
         private System.Windows.Forms.Label AppName;
-        private System.Windows.Forms.Label labelCopy;
         private System.Windows.Forms.CheckBox LowPassChecked;
         private System.Windows.Forms.Label labelFIlter;
         private System.Windows.Forms.TextBox textBox_sampleFIlter;

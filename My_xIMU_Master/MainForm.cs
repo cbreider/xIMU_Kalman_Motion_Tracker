@@ -25,6 +25,7 @@ namespace My_xIMU_Master
         private x_IMU_API.PortAssignment[] portAssignment;
         private xIMU xIMU_1;
         private xIMU xIMU_2;
+        private List<xIMU> xIMUs = new List<xIMU>();
 
         private System.Timers.Timer _guiUpdateTimer = new System.Timers.Timer();
         BackgroundWorker ChartWorker = new BackgroundWorker();
@@ -51,8 +52,8 @@ namespace My_xIMU_Master
         private void Form1_Load(object sender, EventArgs e)
         {
             ConStateLabel.Text = "Not Connected";
-            AviablePortsLable.Text = "No Ports aviable";
-            SampleFreqLabel.Text = "----------";
+            AvailablePortsLabel.Text = "No Ports aviable";
+            SampleFreqLabel.Text = ConStateLabel2.Text = AvailablePortsLabel2.Text = SamplefreqLabel2.Text = "-------------------";
             _available = false;
           
             ButtonOpen.Enabled = false;
@@ -67,6 +68,8 @@ namespace My_xIMU_Master
             SizeChanged += new System.EventHandler(MainForm_SizeChanged);
         
             InitTabControl();
+
+            
         }
         #endregion
 
@@ -76,29 +79,31 @@ namespace My_xIMU_Master
         private void Search_for_xIMU(object sender, EventArgs e)
         {
             portAssignment = (new x_IMU_API.PortScanner(false, true)).Scan();
-            if (portAssignment.Count() > 0)
-            {
-                _available = true;
-            }
-            else
-            {
-                _available = false;
-            }
         }
 
         private void Search_finished(object sender, EventArgs e)
-        {
-            if (_available)
+        { 
+          
+            if (portAssignment.Count()==1)
             {
-                ButtonOpen.Enabled = true;
-                AviablePortsLable.Text = "Aviable Ports:   " + portAssignment[0].PortName;
+                AvailablePortsLabel.Text = "Avialable Ports:   " + portAssignment[0].PortName;
+                ButtonClose.Enabled = false;
+                ButtonOpen.Enabled = false;
+                AvailablePortsLabel2.Text = "xIMU not available!";
             }
-            else
+            if(portAssignment.Count()==2)
+            {
+                AvailablePortsLabel2.Text = "Avialable Ports:   " + portAssignment[1].PortName;
+                AvailablePortsLabel.Text = "Avialable Ports:   " + portAssignment[0].PortName;
+                ButtonOpen.Enabled = true;
+            }
+           else
             {
                 ButtonClose.Enabled = false;
                 ButtonOpen.Enabled = false;
-                AviablePortsLable.Text = "No xIMU aviable!";
-            }
+                AvailablePortsLabel2.Text = "xIMU not available!";
+                AvailablePortsLabel.Text = "xIMU not available!";
+            }            
         }
         #endregion
 
@@ -107,11 +112,13 @@ namespace My_xIMU_Master
         private void Connect_to_xIMUs()
         {            
             xIMU_1 = new xIMU(portAssignment[0], 1, LowPassChecked.Checked);
+            xIMU_2 = new xIMU(portAssignment[1], 1, LowPassChecked.Checked);
             Status ConnectionState = xIMU_1.Connect();
-            switch(ConnectionState)
-            {
-                case Status.Good:
-                    ConStateLabel.Text = "Connected to x-IMU " + portAssignment[0].DeviceID + " on " + portAssignment[0].PortName + ".";
+            
+            if(ConnectionState == Status.Good)               
+            {                   
+                ConStateLabel.Text = "Connected to x-IMU " + portAssignment[0].DeviceID + " on " + portAssignment[0].PortName + ".";               
+            }
                     Stop.Enabled = true;
                     ButtonClose.Enabled = true;
                     break;
@@ -120,8 +127,9 @@ namespace My_xIMU_Master
                     ButtonOpen.Enabled = true;
                     ButtonClose.Enabled = false;                   
                     break;
-            }
             
+            ConnectionState = xIMU_2.Connect();
+
             _timerCounter = 0;
             _clearSeries = false;
         }
@@ -139,117 +147,7 @@ namespace My_xIMU_Master
             UpdateCharts();
             UpdateWPFChart();
         }
-
-        private void UpdateCharts(/*object sender, DoWorkEventArgs e*/)
-        {
-            if (InvokeRequired)
-            {
-                u = new UpdateCallback(UpdateCharts);
-                BeginInvoke(u);
-            }
-            else
-            {
-                SampleFreqLabel.Text = xIMU_1.DataGatherer.SampleFrequency.ToString();
-               
-                List<PlotData> plotdata= xIMU_1.DataGatherer.GetPlotData();
-                Series seriesX = new Series();
-                Series seriesY = new Series();
-                Series seriesZ = new Series();
-                //Thread[] threads = new Thread[plotdata.Count];
-                int i = 0;
-                foreach (PlotData data in plotdata)
-                {
-                   
-                    if (data.Type==DataTypes.Accelerometer)
-                    {
-                        seriesX = ChartAccX.Series[0];
-                        seriesY = ChartAccY.Series[0];
-                        seriesZ = ChartAccZ.Series[0];
-                    }
-                    else if (data.Type == DataTypes.Gyroscope)
-                    {
-                        seriesX = ChartGyrX.Series[0];
-                        seriesY = ChartGyrY.Series[0];
-                        seriesZ = ChartGyrZ.Series[0];
-                    }
-                    else if (data.Type == DataTypes.Magnetometer) {
-                        seriesX =  ChartMagX.Series[0];
-                        seriesY = ChartMagY.Series[0];
-                        seriesZ = ChartMagZ.Series[0];
-                    }
-                    else if (data.Type == DataTypes.LinearAcceleration) {
-                        seriesX = ChartLinAccX.Series[0];
-                        seriesY = ChartLinAccY.Series[0];
-                        seriesZ = ChartLinAccZ.Series[0];
-                    }
-                    else if (data.Type == DataTypes.LinearVelocity) {
-                        seriesX = ChartLinVelX.Series[0];
-                        seriesY = ChartLinVelY.Series[0];
-                        seriesZ = ChartLinVelZ.Series[0];
-                            }
-                    else if (data.Type == DataTypes.LinearPosition) {
-                        seriesX = ChartLinPosX.Series[0];
-                        seriesY = ChartLinPosY.Series[0];
-                        seriesZ = ChartLinPosZ.Series[0];
-                    }
-                    else if (data.Type == DataTypes.KalmanLinearAcceleration) {
-                        seriesX = ChartLinAccX.Series[1];
-                        seriesY = ChartLinAccY.Series[1];
-                        seriesZ = ChartLinAccZ.Series[1];
-                    }
-                    else if (data.Type == DataTypes.KalmanLinearVelocity) {
-                        seriesX = ChartLinVelX.Series[1];
-                        seriesY = ChartLinVelY.Series[1];
-                        seriesZ = ChartLinVelZ.Series[1];
-                    }
-                    else if (data.Type == DataTypes.KalmanLinearPosition) {
-                        seriesX = ChartLinPosX.Series[1];
-                        seriesY = ChartLinPosY.Series[1];
-                        seriesZ = ChartLinPosZ.Series[1];
-                    }
-
-                    else if (data.Type == DataTypes.LowPassFilteredAcc && LowPassChecked.Checked)
-                    {
-                        seriesX = ChartLinAccX.Series[2];
-                        seriesY = ChartLinAccY.Series[2];
-                        seriesZ = ChartLinAccZ.Series[2];
-                    }
-                   
-                    UpdateChart(seriesX, seriesY, seriesZ, data);
-                }
-                _clearSeries = false;
-
-                foreach (Chart chart in Charts)
-                {
-                    chart.ChartAreas[0].AxisX.Maximum = _timerCounter;
-                    chart.ChartAreas[0].AxisX.Minimum = _timerCounter - 2;
-                }
-            }
-        }
-         private  void UpdateChart(Series chartX,Series chartY, Series chartZ, PlotData data)
-        {
-            float[] point = new float[3];
-            float temTime = (float)_timerCounter;
-            float interval = (float)_guiUpdateTimer.Interval / (1000 * data.DataToPlot.Count);
-
-            while (data.DataToPlot.Count>0)
-            {
-                temTime += interval;
-                point = data.DataToPlot.Dequeue();
-                if (point != null)
-                {
-                    if(_clearSeries)
-                    {
-                        chartX.Points.Clear();
-                        chartY.Points.Clear();
-                        chartZ.Points.Clear();
-                    }
-                    chartX.Points.AddXY(temTime, point[0]);
-                    chartY.Points.AddXY(temTime, point[1]);
-                    chartZ.Points.AddXY(temTime, point[2]);
-                }
-            }
-        }
+        
         private void ChartUpdateCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
         }
@@ -270,7 +168,7 @@ namespace My_xIMU_Master
 
         private void B_ScanForPorts_Click(object sender, EventArgs e)
         {
-            AviablePortsLable.Text = "Searching for aviable COM Ports";
+            AvailablePortsLabel.Text = "Searching for aviable COM Ports";
             BackgroundWorker bw = new BackgroundWorker();
             bw.DoWork += new DoWorkEventHandler(Search_for_xIMU);
             bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Search_finished);

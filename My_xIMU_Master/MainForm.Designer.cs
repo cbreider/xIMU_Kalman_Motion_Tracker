@@ -50,7 +50,7 @@ namespace My_xIMU_Master
             this.SampleFreqLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.ConStateLabel = new System.Windows.Forms.Label();
-            this.AviablePortsLable = new System.Windows.Forms.Label();
+            this.AvailablePortsLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.B_ScanForPorts = new System.Windows.Forms.Button();
@@ -80,6 +80,9 @@ namespace My_xIMU_Master
             this.labelFH = new System.Windows.Forms.Label();
             this.LabelVersion = new System.Windows.Forms.Label();
             this.AppName = new System.Windows.Forms.Label();
+            this.ConStateLabel2 = new System.Windows.Forms.Label();
+            this.AvailablePortsLabel2 = new System.Windows.Forms.Label();
+            this.SamplefreqLabel2 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -286,12 +289,12 @@ namespace My_xIMU_Master
             // 
             // AviablePortsLable
             // 
-            this.AviablePortsLable.AutoSize = true;
-            this.AviablePortsLable.Location = new System.Drawing.Point(119, 7);
-            this.AviablePortsLable.Name = "AviablePortsLable";
-            this.AviablePortsLable.Size = new System.Drawing.Size(64, 13);
-            this.AviablePortsLable.TabIndex = 3;
-            this.AviablePortsLable.Text = "...................";
+            this.AvailablePortsLabel.AutoSize = true;
+            this.AvailablePortsLabel.Location = new System.Drawing.Point(119, 7);
+            this.AvailablePortsLabel.Name = "AviablePortsLable";
+            this.AvailablePortsLabel.Size = new System.Drawing.Size(64, 13);
+            this.AvailablePortsLabel.TabIndex = 3;
+            this.AvailablePortsLabel.Text = "...................";
             // 
             // label2
             // 
@@ -436,10 +439,13 @@ namespace My_xIMU_Master
             // 
             // TabConnectionCont
             // 
+            this.TabConnectionCont.Controls.Add(this.SamplefreqLabel2);
+            this.TabConnectionCont.Controls.Add(this.AvailablePortsLabel2);
+            this.TabConnectionCont.Controls.Add(this.ConStateLabel2);
             this.TabConnectionCont.Controls.Add(this.button37);
             this.TabConnectionCont.Controls.Add(this.label1);
             this.TabConnectionCont.Controls.Add(this.label2);
-            this.TabConnectionCont.Controls.Add(this.AviablePortsLable);
+            this.TabConnectionCont.Controls.Add(this.AvailablePortsLabel);
             this.TabConnectionCont.Controls.Add(this.ConStateLabel);
             this.TabConnectionCont.Controls.Add(this.label5);
             this.TabConnectionCont.Controls.Add(this.SampleFreqLabel);
@@ -601,6 +607,33 @@ namespace My_xIMU_Master
             this.AppName.TabIndex = 20;
             this.AppName.Text = "xIMU Gait-Tracking and Recognition Master";
             // 
+            // ConStateLabel2
+            // 
+            this.ConStateLabel2.AutoSize = true;
+            this.ConStateLabel2.Location = new System.Drawing.Point(266, 39);
+            this.ConStateLabel2.Name = "ConStateLabel2";
+            this.ConStateLabel2.Size = new System.Drawing.Size(35, 13);
+            this.ConStateLabel2.TabIndex = 15;
+            this.ConStateLabel2.Text = "label3";
+            // 
+            // AvailablePortsLabel2
+            // 
+            this.AvailablePortsLabel2.AutoSize = true;
+            this.AvailablePortsLabel2.Location = new System.Drawing.Point(266, 7);
+            this.AvailablePortsLabel2.Name = "AvailablePortsLabel2";
+            this.AvailablePortsLabel2.Size = new System.Drawing.Size(35, 13);
+            this.AvailablePortsLabel2.TabIndex = 16;
+            this.AvailablePortsLabel2.Text = "label4";
+            // 
+            // SamplefreqLabel2
+            // 
+            this.SamplefreqLabel2.AutoSize = true;
+            this.SamplefreqLabel2.Location = new System.Drawing.Point(266, 67);
+            this.SamplefreqLabel2.Name = "SamplefreqLabel2";
+            this.SamplefreqLabel2.Size = new System.Drawing.Size(35, 13);
+            this.SamplefreqLabel2.TabIndex = 17;
+            this.SamplefreqLabel2.Text = "label6";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -650,7 +683,7 @@ namespace My_xIMU_Master
         private System.Windows.Forms.Label SampleFreqLabel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label ConStateLabel;
-        private System.Windows.Forms.Label AviablePortsLable;
+        private System.Windows.Forms.Label AvailablePortsLabel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button B_ScanForPorts;
@@ -687,6 +720,9 @@ namespace My_xIMU_Master
         private System.Windows.Forms.CheckBox LowPassChecked;
         private System.Windows.Forms.Label labelFIlter;
         private System.Windows.Forms.TextBox textBox_sampleFIlter;
+        private System.Windows.Forms.Label AvailablePortsLabel2;
+        private System.Windows.Forms.Label ConStateLabel2;
+        private System.Windows.Forms.Label SamplefreqLabel2;
         //Charts
 
     }

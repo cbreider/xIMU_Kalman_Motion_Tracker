@@ -8,7 +8,10 @@ namespace My_xIMU_Master
 {
    public enum Status
     {
+        Connected,
+        Disconnected,
+        Empty,
         Good,
-        Bad,
+        Bad
     };
 }

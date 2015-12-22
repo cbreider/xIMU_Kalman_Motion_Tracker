@@ -115,3 +115,32 @@ C:\MyProjects\C#\My xIMU Master\My_xIMU_Master\obj\Debug\My_xIMU_Master.g.resour
 C:\MyProjects\C#\My xIMU Master\My_xIMU_Master\obj\Debug\My_xIMU_Master.MainForm.resources
 C:\MyProjects\C#\My xIMU Master\My_xIMU_Master\obj\Debug\My_xIMU_Master.Properties.Resources.resources
 C:\MyProjects\C#\My xIMU Master\My_xIMU_Master\obj\Debug\My_xIMU_Master.csproj.GenerateResource.Cache
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\bin\Debug\My_xIMU_Master.exe.config
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\obj\Debug\My_xIMU_Master.exe
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\obj\Debug\My_xIMU_Master.pdb
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\bin\Debug\opencv_core231.dll
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\bin\Debug\opencv_imgproc231.dll
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\bin\Debug\My_xIMU_Master.exe
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\bin\Debug\My_xIMU_Master.pdb
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\bin\Debug\Emgu.CV.DebuggerVisualizers.VS2008.dll
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\bin\Debug\Emgu.CV.DebuggerVisualizers.VS2010.dll
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\bin\Debug\Emgu.CV.dll
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\bin\Debug\Emgu.CV.GPU.dll
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\bin\Debug\Emgu.CV.ML.dll
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\bin\Debug\Emgu.CV.UI.dll
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\bin\Debug\Emgu.Util.dll
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\bin\Debug\ZedGraph.dll
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\bin\Debug\MathNet.Filtering.pdb
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\bin\Debug\MathNet.Filtering.Kalman.pdb
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\bin\Debug\MathNet.Numerics.xml
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\obj\Debug\My_xIMU_Master.csprojResolveAssemblyReference.cache
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\obj\Debug\My_xIMU_Master.csproj.My_xIMU_Master.exe.config
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\obj\Debug\3D Chart\3D_WPF_Chart.g.cs
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\obj\Debug\My_xIMU_Master_Content.g.cs
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\obj\Debug\My_xIMU_Master_MarkupCompile.cache
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\obj\Debug\My_xIMU_Master_MarkupCompile.lref
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\obj\Debug\3D Chart\3D_WPF_Chart.baml
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\obj\Debug\My_xIMU_Master.g.resources
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\obj\Debug\My_xIMU_Master.MainForm.resources
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\obj\Debug\My_xIMU_Master.Properties.Resources.resources
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\obj\Debug\My_xIMU_Master.csproj.GenerateResource.Cache

@@ -4,7 +4,7 @@
 winexe
 C#
 .cs
-C:\MyProjects\C#\My xIMU Master\My_xIMU_Master\obj\Debug\
+C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\obj\Debug\
 My_xIMU_Master
 none
 false
@@ -12,9 +12,9 @@ DEBUG;TRACE
 
 11173890315
 21689506631
-6953460781
-291101846194
+701128755581
+29201143394
 3D Chart\3D_WPF_Chart.xaml;
 
-True
+False
 

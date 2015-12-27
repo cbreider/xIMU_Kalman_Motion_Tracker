@@ -121,7 +121,7 @@ namespace My_xIMU_Master._3D_Chart
         // function for set a scatter plot, every dot is just a simple pyramid.
         
 
-        public void plot_next(float x, float y, float z, int i, double[] rotmatrix)
+        public void plot_next(float[] xIMU1_Acc, float[] xIMU2_Acc, int i, double[] xIMU1_rotmatrix, double[] xIMU2_rotmatrix)
         {
             dataN++;
             m_3dChart.SetDataNo(dataN);
@@ -131,32 +131,59 @@ namespace My_xIMU_Master._3D_Chart
             int nDataRange = dataN ;
             ((ScatterChart3D)m_3dChart).Clear();
 
-            ScatterPlotItem plotItem = new ScatterPlotItem();
-            ScatterPlotItem plotItem1 = new ScatterPlotItem();
-            ScatterPlotItem plotItem2 = new ScatterPlotItem();
+            //xIMu1
+            ScatterPlotItem xIMU1_plotItem1 = new ScatterPlotItem();
+            ScatterPlotItem xIMU1_plotItem2 = new ScatterPlotItem();
+            ScatterPlotItem xIMU1_plotItem3 = new ScatterPlotItem();
 
-            plotItem.rotmatrix =plotItem1.rotmatrix=plotItem2.rotmatrix= rotmatrix;
+            xIMU1_plotItem1.rotmatrix =xIMU1_plotItem2.rotmatrix=xIMU1_plotItem3.rotmatrix= xIMU1_rotmatrix;
        
-            plotItem.w=plotItem1.w=plotItem2.w = 1;
-            plotItem.h=plotItem1.h=plotItem2.h = 30;
+            xIMU1_plotItem1.w=xIMU1_plotItem2.w=xIMU1_plotItem3.w = 1;
+            xIMU1_plotItem1.h=xIMU1_plotItem2.h=xIMU1_plotItem3.h = 30;
 
-            plotItem.x =plotItem1.x=plotItem2.x= x;
-            plotItem.y =plotItem1.y=plotItem2.y= y;
-            plotItem.z =plotItem1.z=plotItem2.z= z;
+            xIMU1_plotItem1.x =xIMU1_plotItem2.x=xIMU1_plotItem3.x= xIMU1_Acc[0];
+            xIMU1_plotItem1.y =xIMU1_plotItem2.y=xIMU1_plotItem3.y= xIMU1_Acc[1];
+            xIMU1_plotItem1.z =xIMU1_plotItem2.z=xIMU1_plotItem3.z= xIMU1_Acc[2];
            
-            plotItem.shape = plotItem1.shape=plotItem2.shape=(int)Chart3D.SHAPE.CYLINDER;
+            xIMU1_plotItem1.shape = xIMU1_plotItem2.shape=xIMU1_plotItem3.shape=(int)Chart3D.SHAPE.CYLINDER;
 
-            plotItem.type = 1;
-            plotItem1.type = 2;
-            plotItem2.type = 3;
+            xIMU1_plotItem1.type = 1;
+            xIMU1_plotItem2.type = 2;
+            xIMU1_plotItem3.type = 3;
            
-            plotItem.color = Color.FromRgb((Byte)0, (Byte)0, (Byte)255);
-            ((ScatterChart3D)m_3dChart).SetVertex(dataN, plotItem);
-            plotItem1.color = Color.FromRgb((Byte)0, (Byte)255, (Byte)0);
-            ((ScatterChart3D)m_3dChart).SetVertex(dataN, plotItem1);
-            plotItem2.color = Color.FromRgb((Byte)255, (Byte)0, (Byte)0);
-            ((ScatterChart3D)m_3dChart).SetVertex(dataN, plotItem2);
+            xIMU1_plotItem1.color = Color.FromRgb((Byte)0, (Byte)0, (Byte)255);
+            ((ScatterChart3D)m_3dChart).SetVertex(dataN, xIMU1_plotItem1);
+            xIMU1_plotItem2.color = Color.FromRgb((Byte)0, (Byte)255, (Byte)0);
+            ((ScatterChart3D)m_3dChart).SetVertex(dataN, xIMU1_plotItem2);
+            xIMU1_plotItem3.color = Color.FromRgb((Byte)255, (Byte)0, (Byte)0);
+            ((ScatterChart3D)m_3dChart).SetVertex(dataN, xIMU1_plotItem3);
 
+            //xIMU2
+            ScatterPlotItem xIMU2_plotItem1 = new ScatterPlotItem();
+            ScatterPlotItem xIMU2_plotItem2 = new ScatterPlotItem();
+            ScatterPlotItem xIMU2_plotItem3 = new ScatterPlotItem();
+
+            xIMU2_plotItem1.rotmatrix = xIMU2_plotItem2.rotmatrix = xIMU2_plotItem3.rotmatrix = xIMU2_rotmatrix;
+
+            xIMU2_plotItem1.w = xIMU2_plotItem2.w = xIMU2_plotItem3.w = 1;
+            xIMU2_plotItem1.h = xIMU2_plotItem2.h = xIMU2_plotItem3.h = 30;
+
+            xIMU2_plotItem1.x = xIMU2_plotItem2.x = xIMU2_plotItem3.x = xIMU2_Acc[0];
+            xIMU2_plotItem1.y = xIMU2_plotItem2.y = xIMU2_plotItem3.y = xIMU2_Acc[1];
+            xIMU2_plotItem1.z = xIMU2_plotItem2.z = xIMU2_plotItem3.z = xIMU2_Acc[2];
+
+            xIMU2_plotItem1.shape = xIMU2_plotItem2.shape = xIMU2_plotItem3.shape = (int)Chart3D.SHAPE.CYLINDER;
+
+            xIMU2_plotItem1.type = 1;
+            xIMU2_plotItem2.type = 2;
+            xIMU2_plotItem3.type = 3;
+
+            xIMU2_plotItem1.color = Color.FromRgb((Byte)0, (Byte)0, (Byte)255);
+            ((ScatterChart3D)m_3dChart).SetVertex(dataN, xIMU1_plotItem1);
+            xIMU2_plotItem2.color = Color.FromRgb((Byte)0, (Byte)255, (Byte)0);
+            ((ScatterChart3D)m_3dChart).SetVertex(dataN, xIMU1_plotItem2);
+            xIMU2_plotItem3.color = Color.FromRgb((Byte)255, (Byte)0, (Byte)0);
+            ((ScatterChart3D)m_3dChart).SetVertex(dataN, xIMU1_plotItem3);
             // 3. set axes
             m_3dChart.GetDataRange();
             m_3dChart.SetAxes();

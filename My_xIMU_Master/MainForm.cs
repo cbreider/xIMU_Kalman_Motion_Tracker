@@ -37,9 +37,7 @@ namespace My_xIMU_Master
         private bool calibrating;
         private MicroLibrary.MicroTimer microtimer;
  
-        float X = 0;
-        float Y = 0;
-        float Z = 0;
+       
         int zaehler = 0;
         #endregion
 
@@ -170,11 +168,9 @@ namespace My_xIMU_Master
         }
         private void UpdateWPFChart()
         {
-            X = xIMU_1.DataGatherer.KalEstLinPos.CurrentMeasurement[0] * 100;
-            Y = xIMU_1.DataGatherer.KalEstLinPos.CurrentMeasurement[1] * 100;
-            Z = xIMU_1.DataGatherer.KalEstLinPos.CurrentMeasurement[2] * 100;
             zaehler++;
-            ThreeDPoseChart.plot_next(X, Y, Z, zaehler, xIMU_1.DataGatherer.RotMatrix());        
+            ThreeDPoseChart.plot_next(xIMU_1.DataGatherer.KalEstLinPos.CurrentMeasurement, xIMU_2.DataGatherer.KalEstLinPos.CurrentMeasurement,
+                zaehler, xIMU_1.DataGatherer.RotMatrix(), xIMU_1.DataGatherer.RotMatrix());        
         }
         #endregion
 

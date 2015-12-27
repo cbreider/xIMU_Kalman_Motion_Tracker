@@ -17,9 +17,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Emgu.CV;
-using Emgu.Util;
-using Emgu.CV.Structure;
+using MathNet.Numerics.LinearAlgebra.Single;
+using MathNet.Numerics.LinearAlgebra;
 using System.Drawing.Drawing2D;
 
 namespace My_xIMU_Master
@@ -40,8 +39,8 @@ namespace My_xIMU_Master
         private List<xIMUData> myData = new List<xIMUData>();
         
 
-        private Matrix<float> linState = new Matrix<float>(9, 1);
-        private Matrix<float> kalmanEstState = new Matrix<float>(9, 1);
+        private Matrix<float> linState = DenseMatrix.OfArray(new float[9, 1]);
+        private Matrix<float> kalmanEstState = DenseMatrix.OfArray(new float[9, 1]);
 
         private Matrix<float> transitionMatrix;
         private float[] quaternion = new float[4];
@@ -55,7 +54,7 @@ namespace My_xIMU_Master
         public xIMUDataGatherer(float sampleFreq)
         {
             this.sampleFrequency = sampleFreq;
-            transitionMatrix = new Matrix<float>(new float[,]
+            transitionMatrix = DenseMatrix.OfArray(new float[,]
                      {
                          {1, 0, 0, 0, 0, 0, 0, 0, 0},  // acc, velocity, position
                          {0, 1, 0, 0, 0, 0, 0, 0, 0},
@@ -234,7 +233,7 @@ namespace My_xIMU_Master
         private Matrix<float> getRotationmatrix()
         {
             float[] matrix = (new x_IMU_API.QuaternionData(quaternion)).ConvertToConjugate().ConvertToRotationMatrix();
-            return new Matrix<float>(new float[,]
+            return DenseMatrix.OfArray(new float[,]
             {
                     { matrix[0], matrix[1], matrix[2] },
                     { matrix[3], matrix[4], matrix[5] },

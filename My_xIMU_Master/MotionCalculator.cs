@@ -17,11 +17,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Emgu.CV;
-using Emgu.Util;
-using Emgu.CV.Structure;
 using System.Drawing.Drawing2D;
-using MathNet.Filtering.Kalman;
+using MathNet.Numerics.LinearAlgebra;
+using MathNet.Numerics.LinearAlgebra.Single;
 
 namespace My_xIMU_Master
 {
@@ -47,12 +45,13 @@ namespace My_xIMU_Master
         {
             this.xIMU = xIMU;
             magnituide = new float();
-            magnitudes = new float[] { 0, 0, 0, 0, 0 };
-            average_magnitude = new float();
-            varianz = new float();
-            myKalmanFilter = new KalmanFilter();           
+            magnitudes = new float[] { 0, 0, 0, 0, 0 };      
         }
 
+        private void Init()
+        {
+            myKalmanFilter = new KalmanFilter(xIMU.SamplePeriode, 10f);
+        }
         public void Start_Calculation()
         {            
             Calculate_LinPos();
@@ -95,7 +94,7 @@ namespace My_xIMU_Master
             }
             else
             {*/
-                xIMU.DataGatherer.KalmanEstState = myKalmanFilter.filterMyState(xIMU.DataGatherer.LinAcc.CurrentMeasurementMatrix);
+                xIMU.DataGatherer.KalmanEstState = myKalmanFilter.PredictAndCorrect(xIMU.DataGatherer.LinAcc.CurrentMeasurementMatrix);
            // }
 
             magnituide = (xIMU.DataGatherer.LinAcc.CurrentMeasurement[0] * xIMU.DataGatherer.LinAcc.CurrentMeasurement[0]) 
@@ -152,13 +151,13 @@ namespace My_xIMU_Master
 
         public void Position_Reset()
         {
-            xIMU.DataGatherer.LinState = new Matrix<float>(new float[,]{ { 0},{ 0},{ 0},{ 0},{ 0},{ 0},{ 0},{ 0},{ 0} }); 
+            xIMU.DataGatherer.LinState = DenseMatrix.OfArray(new float[,]{ { 0},{ 0},{ 0},{ 0},{ 0},{ 0},{ 0},{ 0},{ 0} }); 
             myKalmanFilter.Reset();           
         }
         public void Velocity_Reset()
         {
             xIMU.DataGatherer.LinState[3, 0] = 0; xIMU.DataGatherer.LinState[4, 0] = 0; xIMU.DataGatherer.LinState[5, 0] = 0;
-            myKalmanFilter.myState[3, 0] = 0; myKalmanFilter.myState[4, 0] = 0; myKalmanFilter.myState[5, 0] = 0;
+            myKalmanFilter.ReturnToZero();
         }
         public void FilterStateChanged(bool filter)
         {

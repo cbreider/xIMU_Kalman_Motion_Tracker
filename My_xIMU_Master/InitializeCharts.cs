@@ -67,78 +67,84 @@ namespace My_xIMU_Master
             int i = 0;
             foreach (Chart chart in Charts)
             {
-                chart.Series.Add(new Series(chart.Name));
-                chart.Series[0].Color = Color.Red;
-                chart.Series[0].ChartType = SeriesChartType.FastLine;
+                string name;
+                foreach (xIMU imu in xIMUs)
+                {                  
+                    chart.Series.Add(new Series(chart.Name + imu.ID));
+                    chart.Series[0].Color = Color.Red;
+                    chart.Series[0].ChartType = SeriesChartType.FastLine;
+                    
+                    if (i >= 9)
+                    {
+                        name = "Kal. Est. " + chart.Name;
+                        chart.Series.Add(new Series(name));
+                        chart.Series[1].Color = Color.Green;
+                        chart.Series[1].ChartType = SeriesChartType.FastLine;
+                        if (i <= 11)
+                        {
+                            name = "LowPass filtered" + chart.Name;
+                            chart.Series.Add(new Series(name));
+                            chart.Series[2].Color = Color.Blue;
+                            chart.Series[2].ChartType = SeriesChartType.FastLine;
+                        }
+                    }
+                }
+
                 chart.ChartAreas.Add(new ChartArea());
                 chart.ChartAreas[0].AxisX.Title = "Time in s";
                 chart.ChartAreas[0].AxisX.Maximum = 6;
                 chart.ChartAreas[0].AxisX.Minimum = 0;
                 chart.ChartAreas[0].AxisX.Interval = 0.5;
-
-                string name;
-                double[] MinMax = new double[2];
-                if (i < 3)
-                {
-                    name = "Acceleration in g";
-                    MinMax[0] = -4;
-                    MinMax[1] = 4;
-                }
-                else if (i < 6)
-                {
-                    name = "AngularVelocity in deg/s";
-                    MinMax[0] = -90;
-                    MinMax[1] = 90;
-                }
-                else if (i < 9)
-                {
-                    name = "Magnetix flux density in Gauss";
-                    MinMax[0] = -50;
-                    MinMax[1] = 50;
-                }
-                else if (i < 12)
-                {
-                    name = "Acceleration in m/s^2";
-                    MinMax[0] = -8;
-                    MinMax[1] = 8;
-                }
-                else if (i < 15)
-                {
-                    name = "Velocity in m/s";
-                    MinMax[0] = -8;
-                    MinMax[1] = 8;
-                }
-                else
-                {
-                    name = "Position in m";
-                    MinMax[0] = -8;
-                    MinMax[1] = 8;
-                }
-
-                chart.ChartAreas[0].AxisY.Title = name;
-                chart.ChartAreas[0].AxisY.Minimum = MinMax[0];
-                chart.ChartAreas[0].AxisY.Maximum = MinMax[1];
-
                 chart.Legends.Add(new Legend());
                 chart.Size = new System.Drawing.Size(780, 270);
-                if (i >= 9)
-                {                   
-                    name = "Kal. Est. " + chart.Name;
-                    chart.Series.Add(new Series(name));
-                    chart.Series[1].Color = Color.Green;
-                    chart.Series[1].ChartType = SeriesChartType.FastLine;
-                    if (i <= 11)
-                    {
-                        name = "LowPass filtered" + chart.Name;
-                        chart.Series.Add(new Series(name));
-                        chart.Series[2].Color = Color.Blue;
-                        chart.Series[2].ChartType = SeriesChartType.FastLine;
-                    }
-                }
-                chart.Series[0].Points.AddXY(0, 0);
-                i++;
-            }
+                double[] MinMax = new double[2];
 
+                    if (i < 3)
+                    {
+                        name = "Acceleration in g";
+                        MinMax[0] = -4;
+                        MinMax[1] = 4;
+                    }
+                    else if (i < 6)
+                    {
+                        name = "AngularVelocity in deg/s";
+                        MinMax[0] = -90;
+                        MinMax[1] = 90;
+                    }
+                    else if (i < 9)
+                    {
+                        name = "Magnetix flux density in Gauss";
+                        MinMax[0] = -50;
+                        MinMax[1] = 50;
+                    }
+                    else if (i < 12)
+                    {
+                        name = "Acceleration in m/s^2";
+                        MinMax[0] = -8;
+                        MinMax[1] = 8;
+                    }
+                    else if (i < 15)
+                    {
+                        name = "Velocity in m/s";
+                        MinMax[0] = -8;
+                        MinMax[1] = 8;
+                    }
+                    else
+                    {
+                        name = "Position in m";
+                        MinMax[0] = -8;
+                        MinMax[1] = 8;
+                    }
+
+                    chart.ChartAreas[0].AxisY.Title = name;
+                    chart.ChartAreas[0].AxisY.Minimum = MinMax[0];
+                    chart.ChartAreas[0].AxisY.Maximum = MinMax[1];
+
+
+                    chart.Series[0].Points.AddXY(0, 0);
+                    i++;
+                }
+            
             i = 0;
             foreach (TabPage page in tabControl1.TabPages)
             {

@@ -39,7 +39,7 @@ namespace My_xIMU_Master
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.Start = new System.Windows.Forms.Button();
-            this.Stop = new System.Windows.Forms.Button();
+            this.ButtonStart = new System.Windows.Forms.Button();
             this.button42 = new System.Windows.Forms.Button();
             this.button41 = new System.Windows.Forms.Button();
             this.B_Track = new System.Windows.Forms.Button();
@@ -181,13 +181,13 @@ namespace My_xIMU_Master
             // 
             // Stop
             // 
-            this.Stop.Location = new System.Drawing.Point(16, 17);
-            this.Stop.Name = "Stop";
-            this.Stop.Size = new System.Drawing.Size(92, 59);
-            this.Stop.TabIndex = 12;
-            this.Stop.Text = "Start DataStream";
-            this.Stop.UseVisualStyleBackColor = true;
-            this.Stop.Click += new System.EventHandler(this.Button_Start_Click);
+            this.ButtonStart.Location = new System.Drawing.Point(16, 17);
+            this.ButtonStart.Name = "Stop";
+            this.ButtonStart.Size = new System.Drawing.Size(92, 59);
+            this.ButtonStart.TabIndex = 12;
+            this.ButtonStart.Text = "Start DataStream";
+            this.ButtonStart.UseVisualStyleBackColor = true;
+            this.ButtonStart.Click += new System.EventHandler(this.Button_Start_Click);
             // 
             // button42
             // 
@@ -466,7 +466,7 @@ namespace My_xIMU_Master
             this.TabDataCont.Controls.Add(this.LowPassChecked);
             this.TabDataCont.Controls.Add(this.button42);
             this.TabDataCont.Controls.Add(this.Start);
-            this.TabDataCont.Controls.Add(this.Stop);
+            this.TabDataCont.Controls.Add(this.ButtonStart);
             this.TabDataCont.Location = new System.Drawing.Point(4, 22);
             this.TabDataCont.Name = "TabDataCont";
             this.TabDataCont.Padding = new System.Windows.Forms.Padding(3);
@@ -693,7 +693,7 @@ namespace My_xIMU_Master
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.Button Start;
-        private System.Windows.Forms.Button Stop;
+        private System.Windows.Forms.Button ButtonStart;
         private System.Windows.Forms.Button button37;
         private System.Windows.Forms.Button button148;
         private System.Windows.Forms.Button button149;

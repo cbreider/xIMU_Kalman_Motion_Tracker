@@ -58,7 +58,7 @@ namespace My_xIMU_Master
           
             ButtonOpen.Enabled = false;
             Start.Enabled = false;
-            Stop.Enabled = false;
+            ButtonStart.Enabled = false;
 
             _guiUpdateTimer.Interval = 100;
             _guiUpdateTimer.Elapsed += new System.Timers.ElapsedEventHandler(UpdateGUI);
@@ -113,22 +113,39 @@ namespace My_xIMU_Master
         {            
             xIMU_1 = new xIMU(portAssignment[0], 1, LowPassChecked.Checked);
             xIMU_2 = new xIMU(portAssignment[1], 1, LowPassChecked.Checked);
-            Status ConnectionState = xIMU_1.Connect();
-            
-            if(ConnectionState == Status.Good)               
+
+            Status ConnectionState1 = xIMU_1.Connect();            
+            if(ConnectionState1 == Status.Good)               
             {                   
-                ConStateLabel.Text = "Connected to x-IMU " + portAssignment[0].DeviceID + " on " + portAssignment[0].PortName + ".";               
+                ConStateLabel.Text = "Connected to x-IMU " + xIMU_1.ID + " on " + xIMU_1.PortAssignment.PortName + ".";               
             }
-                    Stop.Enabled = true;
-                    ButtonClose.Enabled = true;
-                    break;
-                case Status.Bad:
-                    ConStateLabel.Text = "Connection failed!";
-                    ButtonOpen.Enabled = true;
-                    ButtonClose.Enabled = false;                   
-                    break;
+            else
+            {
+                ConStateLabel.Text = "Connection failed!";
+            }
+
+            Status ConnectionState2 = xIMU_2.Connect();
+            if (ConnectionState2 == Status.Good)
+            {
+                ConStateLabel2.Text = "Connected to x-IMU " + xIMU_2.ID + " on " + xIMU_2.PortAssignment.PortName + ".";
+            }
+            else
+            {
+                ConStateLabel2.Text = "Connection failed!";
+            }
+
+            if(ConnectionState1==Status.Good && ConnectionState2== Status.Good)
+            {
+                ButtonStart.Enabled = true;
+                ButtonClose.Enabled = true;
+            }
+            else
+            {
+                ButtonOpen.Enabled = true;
+                ButtonClose.Enabled = false;
+            }
             
-            ConnectionState = xIMU_2.Connect();
+            
 
             _timerCounter = 0;
             _clearSeries = false;
@@ -154,7 +171,7 @@ namespace My_xIMU_Master
         private void UpdateWPFChart()
         {
             X = xIMU_1.DataGatherer.KalEstLinPos.CurrentMeasurement[0] * 100;
-            Y = xIMU_1.DataGatherer.KalEstLinPos.CurrentMeasurement[1]*100;
+            Y = xIMU_1.DataGatherer.KalEstLinPos.CurrentMeasurement[1] * 100;
             Z = xIMU_1.DataGatherer.KalEstLinPos.CurrentMeasurement[2] * 100;
             zaehler++;
             ThreeDPoseChart.plot_next(X, Y, Z, zaehler, xIMU_1.DataGatherer.RotMatrix());        
@@ -199,10 +216,13 @@ namespace My_xIMU_Master
         
         private void Button_Start_Click(object sender, EventArgs e)
         {          
-            xIMU_1.StartTracking();
+            foreach(xIMU imu in xIMUs)
+            {
+                imu.StartTracking();
+            }
             //ChartWorker.DoWork += new DoWorkEventHandler(UpdateCharts);
             ChartWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ChartUpdateCompleted);
-            Stop.Enabled = true;
+            ButtonStart.Enabled = true;
             _guiUpdateTimer.Enabled = true;
         }
 

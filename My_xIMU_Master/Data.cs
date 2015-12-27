@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using  Emgu.CV;
-using Emgu.Util;
-using Emgu.CV.Structure;
 using System.Drawing.Drawing2D;
+using MathNet.Numerics.LinearAlgebra.Single;
+using MathNet.Numerics.LinearAlgebra;
 
 namespace My_xIMU_Master
     
@@ -45,7 +44,7 @@ namespace My_xIMU_Master
         {
             get
             {
-                return new Matrix<float>(new float[3, 1]{
+                return DenseMatrix.OfArray(new float[3, 1] {
                 { _currentMeasurement[0] },
                 {_currentMeasurement[1] },
                 {_currentMeasurement[2] },});

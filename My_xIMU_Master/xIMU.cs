@@ -20,11 +20,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Emgu.CV;
-using Emgu.Util;
-using Emgu.CV.Structure;
 using System.Drawing;
-using MathNet.Filtering;
+
 
 namespace My_xIMU_Master
 {
@@ -49,8 +46,10 @@ namespace My_xIMU_Master
 
         private bool _isReady;
         private int _sampleCounter;
+        private float _samplePeriode = 1 / 256f;
         #endregion
 
+        public x_IMU_API.PortAssignment PortAssignment { get { return _portAssignment; } }
         public bool Available { get { return _available; } }
         public string ID { get { return _portAssignment.DeviceID ; } }
         public int xIMU_Nr { get { return _xIMU_Nr; } }
@@ -58,6 +57,7 @@ namespace My_xIMU_Master
         public Status ConnectionState { get { if (_xIMUSerial.IsOpen) { return Status.Connected; } else { return Status.Disconnected; } } }
         public x_IMU_API.xIMUserial XIMUSerial { get { return _xIMUSerial; } }
         public bool Filterstate { get { return _filterState; } }
+        public float SamplePeriode { get { return _samplePeriode; } }
 
         //public float Interval { get { return interval; } }
 
@@ -71,9 +71,8 @@ namespace My_xIMU_Master
         private void Init()
         {
             _xIMUSerial = new x_IMU_API.xIMUserial(_portAssignment.PortName);
-            DataGatherer = new xIMUDataGatherer(256f);
-
-            _ahrs = new MadgwickAHRS(1f / 256f, 0.1f);
+            DataGatherer = new xIMUDataGatherer(1/_samplePeriode);
+            _ahrs = new MadgwickAHRS(_samplePeriode, 0.1f);
             _tracker = new MotionCalculator(this);
             _tracker.FilterStateChanged(_filterState);    
         }
@@ -108,7 +107,7 @@ namespace My_xIMU_Master
             _isReady = true;
             _sampleTimer.Interval = 1000;            
             _sampleCounter = 0;
-            _sampleTimer.Elapsed += new System.Timers.ElapsedEventHandler(sample_frequency);
+            _sampleTimer.Elapsed += new System.Timers.ElapsedEventHandler(Update_SampleFrequency);
             _sampleTimer.Enabled = true;
             // myIIR_Filter = new MathNet.Filtering.IIR.OnlineIirFilter(coefficients);
             //periode_microtimer.MicroTimerElapsed += new MicroLibrary.MicroTimer.MicroTimerElapsedEventHandler(periode_microtimer_tick);*/
@@ -149,7 +148,7 @@ namespace My_xIMU_Master
         }
 
       
-        private void sample_frequency(object sender, System.Timers.ElapsedEventArgs timerEventArgs)
+        private void Update_SampleFrequency(object sender, System.Timers.ElapsedEventArgs timerEventArgs)
         {
             DataGatherer.SampleFrequency =  _sampleCounter;
             _sampleCounter = 0;

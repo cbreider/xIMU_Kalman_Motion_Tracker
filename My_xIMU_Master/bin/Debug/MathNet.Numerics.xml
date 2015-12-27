@@ -557,22 +557,22 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.BetaScaled.A">
             <summary>
-            Gets or sets the α shape parameter of the BetaScaled distribution. Range: α > 0.
+            Gets the α shape parameter of the BetaScaled distribution. Range: α > 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.BetaScaled.B">
             <summary>
-            Gets or sets the β shape parameter of the BetaScaled distribution. Range: β > 0.
+            Gets the β shape parameter of the BetaScaled distribution. Range: β > 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.BetaScaled.Location">
             <summary>
-            Gets or sets the location (μ) of the BetaScaled distribution.
+            Gets the location (μ) of the BetaScaled distribution.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.BetaScaled.Scale">
             <summary>
-            Gets or sets the scale (σ) of the BetaScaled distribution. Range: σ > 0.
+            Gets the scale (σ) of the BetaScaled distribution. Range: σ > 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.BetaScaled.RandomSource">
@@ -836,12 +836,12 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.Triangular.LowerBound">
             <summary>
-            Gets or sets the lower bound of the distribution.
+            Gets the lower bound of the distribution.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Triangular.UpperBound">
             <summary>
-            Gets or sets the upper bound of the distribution.
+            Gets the upper bound of the distribution.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Triangular.RandomSource">
@@ -1087,7 +1087,7 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.Bernoulli.P">
             <summary>
-            Gets or sets the probability of generating a one. Range: 0 ≤ p ≤ 1.
+            Gets the probability of generating a one. Range: 0 ≤ p ≤ 1.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Bernoulli.RandomSource">
@@ -1308,12 +1308,12 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.Beta.A">
             <summary>
-            Gets or sets the α shape parameter of the Beta distribution. Range: α ≥ 0.
+            Gets the α shape parameter of the Beta distribution. Range: α ≥ 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Beta.B">
             <summary>
-            Gets or sets the β shape parameter of the Beta distribution. Range: β ≥ 0.
+            Gets the β shape parameter of the Beta distribution. Range: β ≥ 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Beta.RandomSource">
@@ -1565,12 +1565,12 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.Binomial.P">
             <summary>
-            Gets or sets the success probability in each trial. Range: 0 ≤ p ≤ 1.
+            Gets the success probability in each trial. Range: 0 ≤ p ≤ 1.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Binomial.N">
             <summary>
-            Gets or sets the number of trials. Range: n ≥ 0.
+            Gets the number of trials. Range: n ≥ 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Binomial.RandomSource">
@@ -1819,7 +1819,7 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.Categorical.P">
             <summary>
-            Gets or sets the probability mass vector (non-negative ratios) of the multinomial.
+            Gets the probability mass vector (non-negative ratios) of the multinomial.
             </summary>
             <remarks>Sometimes the normalized probability vector cannot be represented exactly in a floating point representation.</remarks>
         </member>
@@ -2121,12 +2121,12 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.Cauchy.Location">
             <summary>
-            Gets or sets the location  (x0) of the distribution.
+            Gets the location  (x0) of the distribution.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Cauchy.Scale">
             <summary>
-            Gets or sets the scale (γ) of the distribution. Range: γ > 0.
+            Gets the scale (γ) of the distribution. Range: γ > 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Cauchy.RandomSource">
@@ -2359,7 +2359,7 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.Chi.DegreesOfFreedom">
             <summary>
-            Gets or sets the degrees of freedom (k) of the Chi distribution. Range: k > 0.
+            Gets the degrees of freedom (k) of the Chi distribution. Range: k > 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Chi.RandomSource">
@@ -2569,7 +2569,7 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.ChiSquared.DegreesOfFreedom">
             <summary>
-            Gets or sets the degrees of freedom (k) of the Chi-Squared distribution. Range: k > 0.
+            Gets the degrees of freedom (k) of the Chi-Squared distribution. Range: k > 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.ChiSquared.RandomSource">
@@ -2807,12 +2807,12 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.ContinuousUniform.LowerBound">
             <summary>
-            Gets or sets the lower bound of the distribution.
+            Gets the lower bound of the distribution.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.ContinuousUniform.UpperBound">
             <summary>
-            Gets or sets the upper bound of the distribution.
+            Gets the upper bound of the distribution.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.ContinuousUniform.RandomSource">
@@ -3077,12 +3077,12 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.ConwayMaxwellPoisson.Lambda">
             <summary>
-            Gets or sets the lambda (λ) parameter. Range: λ > 0.
+            Gets the lambda (λ) parameter. Range: λ > 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.ConwayMaxwellPoisson.Nu">
             <summary>
-            Gets or sets the rate of decay (ν) parameter. Range: ν ≥ 0.
+            Gets the rate of decay (ν) parameter. Range: ν ≥ 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.ConwayMaxwellPoisson.RandomSource">
@@ -3687,17 +3687,17 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.Erlang.Shape">
             <summary>
-            Gets or sets the shape (k) of the Erlang distribution. Range: k ≥ 0.
+            Gets the shape (k) of the Erlang distribution. Range: k ≥ 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Erlang.Rate">
             <summary>
-            Gets or sets the rate or inverse scale (λ) of the Erlang distribution. Range: λ ≥ 0.
+            Gets the rate or inverse scale (λ) of the Erlang distribution. Range: λ ≥ 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Erlang.Scale">
             <summary>
-            Gets or sets the scale of the Erlang distribution.
+            Gets the scale of the Erlang distribution.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Erlang.RandomSource">
@@ -3908,7 +3908,7 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.Exponential.Rate">
             <summary>
-            Gets or sets the rate (λ) parameter of the distribution. Range: λ ≥ 0.
+            Gets the rate (λ) parameter of the distribution. Range: λ ≥ 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Exponential.RandomSource">
@@ -4132,12 +4132,12 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.FisherSnedecor.DegreesOfFreedom1">
             <summary>
-            Gets or sets the first degree of freedom (d1) of the distribution. Range: d1 > 0.
+            Gets the first degree of freedom (d1) of the distribution. Range: d1 > 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.FisherSnedecor.DegreesOfFreedom2">
             <summary>
-            Gets or sets the second degree of freedom (d2) of the distribution. Range: d2 > 0.
+            Gets the second degree of freedom (d2) of the distribution. Range: d2 > 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.FisherSnedecor.RandomSource">
@@ -4664,7 +4664,7 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.Geometric.P">
             <summary>
-            Gets or sets the probability of generating a one. Range: 0 ≤ p ≤ 1.
+            Gets the probability of generating a one. Range: 0 ≤ p ≤ 1.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Geometric.RandomSource">
@@ -4879,17 +4879,17 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.Hypergeometric.Population">
             <summary>
-            Gets or sets the size of the population (N).
+            Gets the size of the population (N).
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Hypergeometric.Draws">
             <summary>
-            Gets or sets the number of draws without replacement (n).
+            Gets the number of draws without replacement (n).
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Hypergeometric.Success">
             <summary>
-            Gets or sets the number successes within the population (K, M).
+            Gets the number successes within the population (K, M).
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Hypergeometric.Mean">
@@ -5437,12 +5437,12 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.Laplace.Location">
             <summary>
-            Gets or sets the location (μ) of the Laplace distribution.
+            Gets the location (μ) of the Laplace distribution.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Laplace.Scale">
             <summary>
-            Gets or sets the scale (b) of the Laplace distribution. Range: b > 0.
+            Gets the scale (b) of the Laplace distribution. Range: b > 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Laplace.RandomSource">
@@ -5687,12 +5687,12 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.LogNormal.Mu">
             <summary>
-            Gets or sets the log-scale (μ) (mean of the logarithm) of the distribution.
+            Gets the log-scale (μ) (mean of the logarithm) of the distribution.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.LogNormal.Sigma">
             <summary>
-            Gets or sets the shape (σ) (standard deviation of the logarithm) of the distribution. Range: σ ≥ 0.
+            Gets the shape (σ) (standard deviation of the logarithm) of the distribution. Range: σ ≥ 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.LogNormal.RandomSource">
@@ -5952,19 +5952,19 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.MatrixNormal.Mean">
             <summary>
-            Gets or sets the mean. (M)
+            Gets the mean. (M)
             </summary>
             <value>The mean of the distribution.</value>
         </member>
         <member name="P:MathNet.Numerics.Distributions.MatrixNormal.RowCovariance">
             <summary>
-            Gets or sets the row covariance. (V)
+            Gets the row covariance. (V)
             </summary>
             <value>The row covariance.</value>
         </member>
         <member name="P:MathNet.Numerics.Distributions.MatrixNormal.ColumnCovariance">
             <summary>
-            Gets or sets the column covariance. (K)
+            Gets the column covariance. (K)
             </summary>
             <value>The column covariance.</value>
         </member>
@@ -6077,12 +6077,12 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.Multinomial.P">
             <summary>
-            Gets or sets the proportion of ratios.
+            Gets the proportion of ratios.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Multinomial.N">
             <summary>
-            Gets or sets the number of trials.
+            Gets the number of trials.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Multinomial.RandomSource">
@@ -6196,12 +6196,12 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.NegativeBinomial.R">
             <summary>
-            Gets or sets the number of trials. Range: r ≥ 0.
+            Gets the number of trials. Range: r ≥ 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.NegativeBinomial.P">
             <summary>
-            Gets or sets the probability of success. Range: 0 ≤ p ≤ 1.
+            Gets the probability of success. Range: 0 ≤ p ≤ 1.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.NegativeBinomial.RandomSource">
@@ -6466,27 +6466,27 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.Normal.Mean">
             <summary>
-            Gets or sets the mean (μ) of the normal distribution.
+            Gets the mean (μ) of the normal distribution.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Normal.StdDev">
             <summary>
-            Gets or sets the standard deviation (σ) of the normal distribution. Range: σ ≥ 0.
+            Gets the standard deviation (σ) of the normal distribution. Range: σ ≥ 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Normal.Variance">
             <summary>
-            Gets or sets the variance of the normal distribution.
+            Gets the variance of the normal distribution.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Normal.Precision">
             <summary>
-            Gets or sets the precision of the normal distribution.
+            Gets the precision of the normal distribution.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Normal.RandomSource">
             <summary>
-            Gets or sets the random number generator which is used to draw random samples.
+            Gets the random number generator which is used to draw random samples.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Normal.Entropy">
@@ -6750,22 +6750,22 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.NormalGamma.MeanLocation">
             <summary>
-            Gets or sets the location of the mean.
+            Gets the location of the mean.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.NormalGamma.MeanScale">
             <summary>
-            Gets or sets the scale of the mean.
+            Gets the scale of the mean.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.NormalGamma.PrecisionShape">
             <summary>
-            Gets or sets the shape of the precision.
+            Gets the shape of the precision.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.NormalGamma.PrecisionInverseScale">
             <summary>
-            Gets or sets the inverse scale of the precision.
+            Gets the inverse scale of the precision.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.NormalGamma.RandomSource">
@@ -6902,12 +6902,12 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.Pareto.Scale">
             <summary>
-            Gets or sets the scale (xm) of the distribution. Range: xm > 0.
+            Gets the scale (xm) of the distribution. Range: xm > 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Pareto.Shape">
             <summary>
-            Gets or sets the shape (α) of the distribution. Range: α > 0.
+            Gets the shape (α) of the distribution. Range: α > 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Pareto.RandomSource">
@@ -7145,12 +7145,12 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.Poisson.Lambda">
             <summary>
-            Gets or sets the Poisson distribution parameter λ. Range: λ > 0.
+            Gets the Poisson distribution parameter λ. Range: λ > 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Poisson.RandomSource">
             <summary>
-            Gets or sets the random number generator which is used to draw random samples.
+            Gets the random number generator which is used to draw random samples.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Poisson.Mean">
@@ -7376,7 +7376,7 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.Rayleigh.Scale">
             <summary>
-            Gets or sets the scale (σ) of the distribution. Range: σ > 0.
+            Gets the scale (σ) of the distribution. Range: σ > 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Rayleigh.RandomSource">
@@ -7609,22 +7609,22 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.Stable.Alpha">
             <summary>
-            Gets or sets the stability (α) of the distribution. Range: 2 ≥ α > 0.
+            Gets the stability (α) of the distribution. Range: 2 ≥ α > 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Stable.Beta">
             <summary>
-            Gets or sets The skewness (β) of the distribution. Range: 1 ≥ β ≥ -1.
+            Gets The skewness (β) of the distribution. Range: 1 ≥ β ≥ -1.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Stable.Scale">
             <summary>
-            Gets or sets the scale (c) of the distribution. Range: c > 0.
+            Gets the scale (c) of the distribution. Range: c > 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Stable.Location">
             <summary>
-            Gets or sets the location (μ) of the distribution.
+            Gets the location (μ) of the distribution.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Stable.RandomSource">
@@ -7896,17 +7896,17 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.StudentT.Location">
             <summary>
-            Gets or sets the location (μ) of the Student t-distribution.
+            Gets the location (μ) of the Student t-distribution.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.StudentT.Scale">
             <summary>
-            Gets or sets the scale (σ) of the Student t-distribution. Range: σ > 0.
+            Gets the scale (σ) of the Student t-distribution. Range: σ > 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.StudentT.DegreesOfFreedom">
             <summary>
-            Gets or sets the degrees of freedom (ν) of the Student t-distribution. Range: ν > 0.
+            Gets the degrees of freedom (ν) of the Student t-distribution. Range: ν > 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.StudentT.RandomSource">
@@ -8173,12 +8173,12 @@
         </member>
         <member name="P:MathNet.Numerics.Distributions.Weibull.Shape">
             <summary>
-            Gets or sets the shape (k) of the Weibull distribution. Range: k > 0.
+            Gets the shape (k) of the Weibull distribution. Range: k > 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Weibull.Scale">
             <summary>
-            Gets or sets the scale (λ) of the Weibull distribution. Range: λ > 0.
+            Gets the scale (λ) of the Weibull distribution. Range: λ > 0.
             </summary>
         </member>
         <member name="P:MathNet.Numerics.Distributions.Weibull.RandomSource">
@@ -44864,7 +44864,7 @@
         </member>
         <member name="M:MathNet.Numerics.Statistics.ArrayStatistics.Maximum(System.Double[])">
             <summary>
-            Returns the smallest value from the unsorted data array.
+            Returns the largest value from the unsorted data array.
             Returns NaN if data is empty or any entry is NaN.
             </summary>
             <param name="data">Sample array, no sorting is assumed.</param>
@@ -44879,6 +44879,20 @@
         <member name="M:MathNet.Numerics.Statistics.ArrayStatistics.Mean(System.Double[])">
             <summary>
             Estimates the arithmetic sample mean from the unsorted data array.
+            Returns NaN if data is empty or any entry is NaN.
+            </summary>
+            <param name="data">Sample array, no sorting is assumed.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Statistics.ArrayStatistics.GeometricMean(System.Double[])">
+            <summary>
+            Evaluates the geometric mean of the unsorted data array.
+            Returns NaN if data is empty or any entry is NaN.
+            </summary>
+            <param name="data">Sample array, no sorting is assumed.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Statistics.ArrayStatistics.HarmonicMean(System.Double[])">
+            <summary>
+            Evaluates the harmonic mean of the unsorted data array.
             Returns NaN if data is empty or any entry is NaN.
             </summary>
             <param name="data">Sample array, no sorting is assumed.</param>
@@ -45135,6 +45149,12 @@
             Running statistics accumulator, allows updating by adding values
             or by combining two accumulators.
             </summary>
+            <remarks>
+            This type declares a DataContract for out of the box ephemeral serialization
+            with engines like DataContractSerializer, Protocol Buffers and FsPickler,
+            but does not guarantee any compatibility between versions.
+            It is not recommended to rely on this mechanism for durable persistance.
+            </remarks>
         </member>
         <member name="P:MathNet.Numerics.Statistics.RunningStatistics.Count">
             <summary>
@@ -45268,6 +45288,20 @@
         <member name="M:MathNet.Numerics.Statistics.StreamingStatistics.Mean(System.Collections.Generic.IEnumerable{System.Double})">
             <summary>
             Estimates the arithmetic sample mean from the enumerable, in a single pass without memoization.
+            Returns NaN if data is empty or any entry is NaN.
+            </summary>
+            <param name="stream">Sample stream, no sorting is assumed.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Statistics.StreamingStatistics.GeometricMean(System.Collections.Generic.IEnumerable{System.Double})">
+            <summary>
+            Evaluates the geometric mean of the enumerable, in a single pass without memoization.
+            Returns NaN if data is empty or any entry is NaN.
+            </summary>
+            <param name="stream">Sample stream, no sorting is assumed.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Statistics.StreamingStatistics.HarmonicMean(System.Collections.Generic.IEnumerable{System.Double})">
+            <summary>
+            Evaluates the harmonic mean of the enumerable, in a single pass without memoization.
             Returns NaN if data is empty or any entry is NaN.
             </summary>
             <param name="stream">Sample stream, no sorting is assumed.</param>
@@ -45553,8 +45587,14 @@
             NIST standard of accuracy for mean, variance, and standard deviation
             (the only statistics they provide exact values for) and exceeds them
             in increased accuracy mode.
+            Recommendation: consider to use RunningStatistics instead.
             </summary>
-            <remarks>Consider to use RunningStatistics instead.</remarks>
+            <remarks>
+            This type declares a DataContract for out of the box ephemeral serialization
+            with engines like DataContractSerializer, Protocol Buffers and FsPickler,
+            but does not guarantee any compatibility between versions.
+            It is not recommended to rely on this mechanism for durable persistance.
+            </remarks>
         </member>
         <member name="M:MathNet.Numerics.Statistics.DescriptiveStatistics.#ctor(System.Collections.Generic.IEnumerable{System.Double},System.Boolean)">
             <summary>
@@ -45675,6 +45715,12 @@
             A <see cref="T:MathNet.Numerics.Statistics.Histogram"/> consists of a series of <see cref="T:MathNet.Numerics.Statistics.Bucket"/>s,
             each representing a region limited by a lower bound (exclusive) and an upper bound (inclusive).
             </summary>
+            <remarks>
+            This type declares a DataContract for out of the box ephemeral serialization
+            with engines like DataContractSerializer, Protocol Buffers and FsPickler,
+            but does not guarantee any compatibility between versions.
+            It is not recommended to rely on this mechanism for durable persistance.
+            </remarks>
         </member>
         <member name="T:MathNet.Numerics.Statistics.Bucket.PointComparer">
             <summary>
@@ -46753,6 +46799,22 @@
             </summary>
             <param name="data">The data to calculate the mean of.</param>
             <returns>The mean of the sample.</returns>
+        </member>
+        <member name="M:MathNet.Numerics.Statistics.Statistics.GeometricMean(System.Collections.Generic.IEnumerable{System.Double})">
+            <summary>
+            Evaluates the geometric mean.
+            Returns NaN if data is empty or if any entry is NaN.
+            </summary>
+            <param name="data">The data to calculate the geometric mean of.</param>
+            <returns>The geometric mean of the sample.</returns>
+        </member>
+        <member name="M:MathNet.Numerics.Statistics.Statistics.HarmonicMean(System.Collections.Generic.IEnumerable{System.Double})">
+            <summary>
+            Evaluates the harmonic mean.
+            Returns NaN if data is empty or if any entry is NaN.
+            </summary>
+            <param name="data">The data to calculate the harmonic mean of.</param>
+            <returns>The harmonic mean of the sample.</returns>
         </member>
         <member name="M:MathNet.Numerics.Statistics.Statistics.Variance(System.Collections.Generic.IEnumerable{System.Double})">
             <summary>

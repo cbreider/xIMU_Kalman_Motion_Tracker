@@ -1,11 +1,20 @@
-﻿using System;
+﻿/*
+Implematntation of Kalmanfilter
+Author:
+ * Christian Breiderhoff
+ * 
+ * Cologne University of Applied Sciences 
+ *
+ * December 2015
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Emgu.CV;
-using Emgu.Util;
-using Emgu.CV.Structure;
+using MathNet.Numerics.LinearAlgebra.Single;
+using MathNet.Numerics.LinearAlgebra;
 using System.Drawing;
 
 
@@ -13,89 +22,102 @@ namespace My_xIMU_Master
 {
     public class KalmanFilter
     {
-        private Kalman kal;
-        public Matrix<float> state;
-        public Matrix<float> myState;
-        public Matrix<float> transitionMatrix;
-        public Matrix<float> measurementMatrix;
-        public Matrix<float> processNoise;
-        public Matrix<float> measurementNoise;
-        public Matrix<float> errorCovariancePost;
+        private Matrix<float> _state;
+        private Matrix<float> _transitionMatrix;
+        private Matrix<float> _measurementMatrix;
+        private Matrix<float> _processNoiseCovarianceMatrix;
+        private Matrix<float> _measurementNoiseCovarianceMatrix;
+        private Matrix<float> _errorCovarianceMatrix;
+        private Matrix<float> _identityMatrix;
+        private float _dt;
+        private float _sigma;
 
-        public KalmanFilter()
+        public KalmanFilter(float dt, float sigma)
         {
-            myState = new Matrix<float>(9, 1);
-            myState[0, 0] = 0f; // x-acc
-            myState[1, 0] = 0f; // y-acc
-            myState[2, 0] = 0f; // z-acc
-                                 myState[3, 0] = 0f; // x-vel
-                                 myState[4, 0] = 0f; // y-vel
-                                 myState[5, 0] = 0f; // z-vel
-                                 myState[6, 0] = 0f; // x-pos
-                                 myState[7, 0] = 0f; // y-pos
-                                 myState[8, 0] = 0f; // z-pos*/
+            this._dt = dt;
+            _sigma = sigma;
+            Init();          
+        }
+        
+        private void Init()
+        {
+            _state = DenseMatrix.OfArray(new float[9, 1]);
+            _state[0, 0] = 0f; // x-acc
+            _state[1, 0] = 0f; // y-acc
+            _state[2, 0] = 0f; // z-acc
+            _state[3, 0] = 0f; // x-vel
+            _state[4, 0] = 0f; // y-vel
+            _state[5, 0] = 0f; // z-vel
+            _state[6, 0] = 0f; // x-pos
+            _state[7, 0] = 0f; // y-pos
+            _state[8, 0] = 0f; // z-pos*/
 
-             transitionMatrix = new Matrix<float>(new float[,]
-                     {
+
+            _transitionMatrix = DenseMatrix.OfArray(new float[,]
+                    {
                          {1, 0, 0, 0, 0, 0, 0, 0, 0},  // acc, velocity, position
                          {0, 1, 0, 0, 0, 0, 0, 0, 0},
                          {0, 0, 1, 0, 0, 0, 0, 0, 0},
-                         {1/256f, 0, 0, 1, 0, 0, 0, 0, 0},
-                         {0, 1/256f, 0, 0, 1, 0, 0, 0, 0},  // x-pos, y-pos, x-velocity, y-velocity
-                         {0, 0, 1/256f, 0, 0, 1, 0, 0, 0},
-                         {1/131072f, 0, 0, 1/256f, 0, 0, 1f, 0, 0},
-                         {0, 1/131072f, 0, 0, 1/256f, 0, 0, 1f, 0},
-                         {0, 0, 1/131072f, 0, 0, 1/256f, 0, 0, 1f},
+                         {_dt, 0, 0, 1, 0, 0, 0, 0, 0},
+                         {0, _dt, 0, 0, 1, 0, 0, 0, 0},  // x-pos, y-pos, x-velocity, y-velocity
+                         {0, 0, _dt, 0, 0, 1, 0, 0, 0},
+                         {0.5f * _dt *_dt, 0, 0, _dt, 0, 0, 1f, 0, 0},
+                         {0, 0.5f * _dt *_dt, 0, 0, _dt, 0, 0, 1f, 0},
+                         {0, 0, 0.5f * _dt *_dt, 0, 0, _dt, 0, 0, 1f},
                         /* {0, 0, 0, 0, 0, 0, 0, 0, 0,1,0 , 0},  // acc, velocity, position
                          {0, 0, 0, 0, 0, 0, 0, 0, 0,0,1 , 0},
                          {0, 0, 0, 0, 0, 0, 0, 0, 0,0,0 , 1},*/
-                     }); 
-             measurementMatrix = new Matrix<float>(new float[,]
-                     {
+                    });
+            _measurementMatrix = DenseMatrix.OfArray(new float[,]
+                    {
                          { 1, 0, 0, 0, 0, 0, 0, 0, 0 },
                          { 0, 1, 0, 0, 0, 0, 0, 0, 0 },
                          { 0, 0, 1, 0, 0, 0, 0, 0, 0 }
-                     });
+                    });
 
-         
+           Matrix<float> G = DenseMatrix.OfArray(new float[,] {
+                                                    { 1,
+                                                    1,
+                                                    1,
+                                                    0.5f * _dt * _dt * _dt,
+                                                    0.5f * _dt * _dt * _dt,
+                                                    0.5f * _dt * _dt * _dt,
+                                                    0.25f * _dt * _dt * _dt * _dt,
+                                                    0.25f * _dt * _dt * _dt * _dt,
+                                                    0.25f * _dt * _dt * _dt * _dt }
+                                                    });
 
-            measurementMatrix.SetIdentity();
-            processNoise = new Matrix<float>(9, 9); //Linked to the size of the transition matrix
-            processNoise.SetIdentity(new MCvScalar(1.0e-4)); //The smaller the value the more resistance to noise 
-           measurementNoise = new Matrix<float>(3, 3); //Fixed accordiong to input data 
-            measurementNoise.SetIdentity(new MCvScalar(1.0e-3));
-            errorCovariancePost = new Matrix<float>(9, 9); //Linked to the size of the transition matrix
-            errorCovariancePost.SetIdentity();
-            kal = new Kalman(9, 3, 0);
-            
-           
-            kal.CorrectedState = myState;
-            kal.TransitionMatrix = transitionMatrix;
-            kal.MeasurementNoiseCovariance = measurementNoise;
-            kal.ProcessNoiseCovariance = processNoise;
-            kal.ErrorCovariancePost = errorCovariancePost;
-            kal.MeasurementMatrix = measurementMatrix;
+            G = G.Transpose();
+            _processNoiseCovarianceMatrix = G * G.Transpose() * _sigma;
+            _errorCovarianceMatrix = DenseMatrix.CreateIdentity(9) * _sigma;
+            _measurementNoiseCovarianceMatrix = DenseMatrix.CreateIdentity(3) * _sigma;
+            _identityMatrix = DenseMatrix.CreateIdentity(9);
         }
-        public Matrix<float> filterMyState(Matrix<float> acc)
+        public Matrix<float> PredictAndCorrect(Matrix<float> acc)
         {
-            /*myState[0, 0] = acc[0, 0];
-            myState[1, 0] = acc[1, 0];
-            myState[2, 0] = acc[2, 0];*/
+            //Predict
+            _state = _transitionMatrix * _state;
+            _errorCovarianceMatrix = _transitionMatrix * _errorCovarianceMatrix * _transitionMatrix.Transpose() + _processNoiseCovarianceMatrix;
 
-            Matrix<float> prediction = kal.Predict();
-                       
-            Matrix<float> estimatedState = kal.Correct(acc);
-            return estimatedState;
+            //Correct
+            var x = acc - (_measurementMatrix * _state);
+            Matrix<float> S = _measurementMatrix * _processNoiseCovarianceMatrix * _measurementMatrix.Transpose() + _measurementNoiseCovarianceMatrix;
+            Matrix<float> K = _processNoiseCovarianceMatrix * _measurementMatrix.Transpose() * S.Inverse();
+
+            _state = _state + (K * x);
+            _processNoiseCovarianceMatrix = (_identityMatrix - (K * _measurementMatrix)) * _processNoiseCovarianceMatrix;
+
+            return _state;
 
         }
-     public void Reset()
+        public void Reset()
         {
-            kal.CorrectedState = myState = new Matrix<float>(9, 1);
+            _state = DenseMatrix.OfArray(new float[9, 1]);
         }
 
         public void ReturnToZero()
         {
-            kal.CorrectedState[3, 0] = kal.CorrectedState[4, 0] = kal.CorrectedState[5, 0] = 0;
+           _state[3, 0] = _state[4, 0] =_state[5, 0] = 0;
         }
     }
 }

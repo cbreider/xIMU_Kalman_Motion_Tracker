@@ -92,6 +92,7 @@ namespace My_xIMU_Master
             this.TabTrackingCont.SuspendLayout();
             this.TabAboutCont.SuspendLayout();
             this.SuspendLayout();
+            this.ThreeDPoseChart = new _3D_Chart._3D_WPF_Chart();
             // 
             // tabControl1
             // 
@@ -332,7 +333,7 @@ namespace My_xIMU_Master
             this.elementHost1.Size = new System.Drawing.Size(775, 630);
             this.elementHost1.TabIndex = 1;
             this.elementHost1.Text = "elementHost1";
-            this.elementHost1.Child = null;
+            this.elementHost1.Child = ThreeDPoseChart;
             // 
             // button148
             // 

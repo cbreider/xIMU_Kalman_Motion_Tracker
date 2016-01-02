@@ -69,11 +69,11 @@ namespace My_xIMU_Master
             {
                 string name;
                 foreach (xIMU imu in xIMUs)
-                {                  
+                {
                     chart.Series.Add(new Series(chart.Name + imu.ID));
                     chart.Series[0].Color = Color.Red;
                     chart.Series[0].ChartType = SeriesChartType.FastLine;
-                    
+
                     if (i >= 9)
                     {
                         name = "Kal. Est. " + chart.Name;
@@ -88,16 +88,16 @@ namespace My_xIMU_Master
                             chart.Series[2].ChartType = SeriesChartType.FastLine;
                         }
                     }
-                }
 
-                chart.ChartAreas.Add(new ChartArea());
-                chart.ChartAreas[0].AxisX.Title = "Time in s";
-                chart.ChartAreas[0].AxisX.Maximum = 6;
-                chart.ChartAreas[0].AxisX.Minimum = 0;
-                chart.ChartAreas[0].AxisX.Interval = 0.5;
-                chart.Legends.Add(new Legend());
-                chart.Size = new System.Drawing.Size(780, 270);
-                double[] MinMax = new double[2];
+
+                    chart.ChartAreas.Add(new ChartArea());
+                    chart.ChartAreas[0].AxisX.Title = "Time in s";
+                    chart.ChartAreas[0].AxisX.Maximum = 6;
+                    chart.ChartAreas[0].AxisX.Minimum = 0;
+                    chart.ChartAreas[0].AxisX.Interval = 0.5;
+                    chart.Legends.Add(new Legend());
+                    chart.Size = new System.Drawing.Size(780, 270);
+                    double[] MinMax = new double[2];
 
                     if (i < 3)
                     {
@@ -144,8 +144,9 @@ namespace My_xIMU_Master
                     chart.Series[0].Points.AddXY(0, 0);
                     i++;
                 }
+            }
+                i = 0;
             
-            i = 0;
             foreach (TabPage page in tabControl1.TabPages)
             {
                 page.Controls.Add(Charts[i]);

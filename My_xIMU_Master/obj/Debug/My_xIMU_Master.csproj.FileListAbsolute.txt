@@ -115,7 +115,6 @@ C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\obj\Debug\My_xIMU_Master.g.resources
 C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\obj\Debug\My_xIMU_Master.MainForm.resources
 C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\obj\Debug\My_xIMU_Master.Properties.Resources.resources
 C:\Users\OPC\Desktop\xIMU\My_xIMU_Master\obj\Debug\My_xIMU_Master.csproj.GenerateResource.Cache
-C:\MyProjects\C#\My xIMU Master\My_xIMU_Master\obj\Debug\My_xIMU_Master.csprojResolveAssemblyReference.cache
 C:\MyProjects\C#\My xIMU Master\My_xIMU_Master\obj\Debug\3D Chart\3D_WPF_Chart.g.cs
 C:\MyProjects\C#\My xIMU Master\My_xIMU_Master\obj\Debug\My_xIMU_Master_MarkupCompile.cache
 C:\MyProjects\C#\My xIMU Master\My_xIMU_Master\obj\Debug\My_xIMU_Master_MarkupCompile.lref

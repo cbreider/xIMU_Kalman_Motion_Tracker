@@ -65,7 +65,8 @@ namespace My_xIMU_Master
         {            
             this._portAssignment = portAssignment;
             this._xIMU_Nr = xIMU_Nr;
-            this._filterState = filter;       
+            this._filterState = filter;
+            Init();     
         }
 
         private void Init()

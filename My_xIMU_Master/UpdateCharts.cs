@@ -26,19 +26,30 @@ namespace My_xIMU_Master
             else
             {
                 SampleFreqLabel.Text = xIMU_1.DataGatherer.SampleFrequency.ToString();
-
+                Series seriesX = new Series();
+                Series seriesY = new Series();
+                Series seriesZ = new Series();
+                int a = 0;
+                int b = 0;
                 foreach (xIMU imu in xIMUs)
                 {
                     List<PlotData> plotdata = imu.DataGatherer.GetPlotData();
-                    Series seriesX = new Series();
-                    Series seriesY = new Series();
-                    Series seriesZ = new Series();
+                    if (imu.xIMU_Nr == 0)
+                    {
+                        a = 0;
+                        b = 1;
+                    }
+                    else if (imu.xIMU_Nr == 1)
+                    {
+                        a = 2;
+                        b = 3;
+                    }
                     //Thread[] threads = new Thread[plotdata.Count];
                     int i = 0;
                     foreach (PlotData data in plotdata)
                     {
 
-                        if (data.Type == DataTypes.Accelerometer)
+                        /*if (data.Type == DataTypes.Accelerometer)
                         {
                             seriesX = ChartAccX.Series[0];
                             seriesY = ChartAccY.Series[0];
@@ -55,50 +66,50 @@ namespace My_xIMU_Master
                             seriesX = ChartMagX.Series[0];
                             seriesY = ChartMagY.Series[0];
                             seriesZ = ChartMagZ.Series[0];
-                        }
-                        else if (data.Type == DataTypes.LinearAcceleration)
+                        }*/
+                        if (data.Type == DataTypes.LinearAcceleration)
                         {
-                            seriesX = ChartLinAccX.Series[0];
-                            seriesY = ChartLinAccY.Series[0];
-                            seriesZ = ChartLinAccZ.Series[0];
+                            seriesX = ChartLinAccX.Series[a];
+                            seriesY = ChartLinAccY.Series[a];
+                            seriesZ = ChartLinAccZ.Series[a];
                         }
                         else if (data.Type == DataTypes.LinearVelocity)
                         {
-                            seriesX = ChartLinVelX.Series[0];
-                            seriesY = ChartLinVelY.Series[0];
-                            seriesZ = ChartLinVelZ.Series[0];
+                            seriesX = ChartLinVelX.Series[a];
+                            seriesY = ChartLinVelY.Series[a];
+                            seriesZ = ChartLinVelZ.Series[a];
                         }
                         else if (data.Type == DataTypes.LinearPosition)
                         {
-                            seriesX = ChartLinPosX.Series[0];
-                            seriesY = ChartLinPosY.Series[0];
-                            seriesZ = ChartLinPosZ.Series[0];
+                            seriesX = ChartLinPosX.Series[a];
+                            seriesY = ChartLinPosY.Series[a];
+                            seriesZ = ChartLinPosZ.Series[a];
                         }
                         else if (data.Type == DataTypes.KalmanLinearAcceleration)
                         {
-                            seriesX = ChartLinAccX.Series[1];
-                            seriesY = ChartLinAccY.Series[1];
-                            seriesZ = ChartLinAccZ.Series[1];
+                            seriesX = ChartLinAccX.Series[b];
+                            seriesY = ChartLinAccY.Series[b];
+                            seriesZ = ChartLinAccZ.Series[b];
                         }
                         else if (data.Type == DataTypes.KalmanLinearVelocity)
                         {
-                            seriesX = ChartLinVelX.Series[1];
-                            seriesY = ChartLinVelY.Series[1];
-                            seriesZ = ChartLinVelZ.Series[1];
+                            seriesX = ChartLinVelX.Series[b];
+                            seriesY = ChartLinVelY.Series[b];
+                            seriesZ = ChartLinVelZ.Series[b];
                         }
                         else if (data.Type == DataTypes.KalmanLinearPosition)
                         {
-                            seriesX = ChartLinPosX.Series[1];
-                            seriesY = ChartLinPosY.Series[1];
-                            seriesZ = ChartLinPosZ.Series[1];
+                            seriesX = ChartLinPosX.Series[b];
+                            seriesY = ChartLinPosY.Series[b];
+                            seriesZ = ChartLinPosZ.Series[b];
                         }
 
-                        else if (data.Type == DataTypes.LowPassFilteredAcc && LowPassChecked.Checked)
+                        /*else if (data.Type == DataTypes.LowPassFilteredAcc && LowPassChecked.Checked)
                         {
                             seriesX = ChartLinAccX.Series[2];
                             seriesY = ChartLinAccY.Series[2];
                             seriesZ = ChartLinAccZ.Series[2];
-                        }
+                        }*/
 
                         UpdateChart(seriesX, seriesY, seriesZ, data);
                     }

@@ -45,8 +45,10 @@ namespace My_xIMU_Master
         {
             this.xIMU = xIMU;
             magnituide = new float();
-            magnitudes = new float[] { 0, 0, 0, 0, 0 };      
+            magnitudes = new float[] { 0, 0, 0, 0, 0 };
+            Init(); 
         }
+        
 
         private void Init()
         {

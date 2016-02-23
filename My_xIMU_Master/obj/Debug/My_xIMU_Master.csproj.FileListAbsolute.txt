@@ -130,3 +130,4 @@ C:\MyProjects\C#\My xIMU Master\My_xIMU_Master\obj\Debug\My_xIMU_Master.Properti
 C:\MyProjects\C#\My xIMU Master\My_xIMU_Master\obj\Debug\My_xIMU_Master.csproj.GenerateResource.Cache
 C:\MyProjects\C#\My xIMU Master\My_xIMU_Master\obj\Debug\My_xIMU_Master.exe
 C:\MyProjects\C#\My xIMU Master\My_xIMU_Master\obj\Debug\My_xIMU_Master.pdb
+C:\MyProjects\C#\My xIMU Master\My_xIMU_Master\obj\Debug\My_xIMU_Master.csprojResolveAssemblyReference.cache

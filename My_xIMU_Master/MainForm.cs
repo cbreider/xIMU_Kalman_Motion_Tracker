@@ -27,7 +27,7 @@ namespace My_xIMU_Master
         private xIMU xIMU_2;
         private List<xIMU> xIMUs = new List<xIMU>();
 
-        private System.Timers.Timer _guiUpdateTimer = new System.Timers.Timer();
+        private System.Windows.Forms.Timer _guiUpdateTimer = new System.Windows.Forms.Timer();
         BackgroundWorker ChartWorker = new BackgroundWorker();
         private double _timerCounter;
         private bool _clearSeries;
@@ -53,20 +53,21 @@ namespace My_xIMU_Master
             AvailablePortsLabel.Text = "No Ports aviable";
             SampleFreqLabel.Text = ConStateLabel2.Text = AvailablePortsLabel2.Text = SamplefreqLabel2.Text = "-------------------";
             _available = false;
-          
+
+            
+
             ButtonOpen.Enabled = false;
             Start.Enabled = false;
             ButtonStart.Enabled = false;
 
             _guiUpdateTimer.Interval = 100;
-            _guiUpdateTimer.Elapsed += new System.Timers.ElapsedEventHandler(UpdateGUI);
+            _guiUpdateTimer.Tick += new EventHandler(UpdateGUI);
             KeyPreview = true;
             KeyDown += new KeyEventHandler(ThreeDPoseChart.OnKeyDown);
 
             SizeChanged += new System.EventHandler(MainForm_SizeChanged);
-        
-            InitTabControl();
 
+            InitTabs();
             
         }
         #endregion
@@ -89,7 +90,7 @@ namespace My_xIMU_Master
                 ButtonOpen.Enabled = false;
                 AvailablePortsLabel2.Text = "xIMU not available!";
             }
-            if(portAssignment.Count()==2)
+            else if(portAssignment.Count()==2)
             {
                 AvailablePortsLabel2.Text = "Avialable Ports:   " + portAssignment[1].PortName;
                 AvailablePortsLabel.Text = "Avialable Ports:   " + portAssignment[0].PortName;
@@ -110,7 +111,9 @@ namespace My_xIMU_Master
         private void Connect_to_xIMUs()
         {            
             xIMU_1 = new xIMU(portAssignment[0], 1, LowPassChecked.Checked);
-            xIMU_2 = new xIMU(portAssignment[1], 1, LowPassChecked.Checked);
+            xIMU_2 = new xIMU(portAssignment[1], 2, LowPassChecked.Checked);
+            xIMUs.Add(xIMU_1);
+            xIMUs.Add(xIMU_2);
 
             Status ConnectionState1 = xIMU_1.Connect();            
             if(ConnectionState1 == Status.Good)               
@@ -136,6 +139,8 @@ namespace My_xIMU_Master
             {
                 ButtonStart.Enabled = true;
                 ButtonClose.Enabled = true;
+                InitTabControl();
+
             }
             else
             {
@@ -151,7 +156,7 @@ namespace My_xIMU_Master
         #endregion
 
         #region Update GUI
-        private void UpdateGUI(object sender, System.Timers.ElapsedEventArgs e)
+        private void UpdateGUI(object sender, EventArgs e)
         {
             _timerCounter += 0.1;
             if (_timerCounter%10 == 0)
@@ -182,6 +187,7 @@ namespace My_xIMU_Master
         private void B_ScanForPorts_Click(object sender, EventArgs e)
         {
             AvailablePortsLabel.Text = "Searching for aviable COM Ports";
+            AvailablePortsLabel2.Text = "Searching for aviable COM Ports";
             BackgroundWorker bw = new BackgroundWorker();
             bw.DoWork += new DoWorkEventHandler(Search_for_xIMU);
             bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Search_finished);
@@ -200,7 +206,7 @@ namespace My_xIMU_Master
 
         private void ButtonClose_Click(object sender, EventArgs e)
         {
-            _guiUpdateTimer.Elapsed -= new System.Timers.ElapsedEventHandler(UpdateGUI);
+            _guiUpdateTimer.Tick -= new EventHandler(UpdateGUI);
             if (xIMU_1 != null) xIMU_1.Close();
 
             //microtimer.MicroTimerElapsed -= new MicroLibrary.MicroTimer.MicroTimerElapsedEventHandler(microtimer_tick);
